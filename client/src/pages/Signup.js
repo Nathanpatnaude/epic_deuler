@@ -5,6 +5,7 @@ import Inventory from "../pages/Inventory";
 import Auth from "../utils/Auth";
 import { useNavigate } from "react-router-dom";
 
+var loggedIn = false;
 const Signup = () => {
   const [addCharacter, { error: charError, data: charData }] =
     useMutation(ADD_CHARACTER);
@@ -62,8 +63,8 @@ const Signup = () => {
       generateChar(name);
 
       // Change route to Inventory on click
-      routeChange();
-      window.location.reload();
+      // routeChange();
+      // window.location.reload();
 
     } catch (e) {
       console.error(JSON.parse(JSON.stringify(e)));
