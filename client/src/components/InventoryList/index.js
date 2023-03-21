@@ -51,10 +51,13 @@ const InventoryList = ({ data }) => {
   }
   return (
     <>
+    <div className="has-text-centered ">
+      Inventory
+      </div>
       {loading ? (
         <div>Loading...</div>
       ) : (itemData.map((item) => (
-
+        
         <ListGroup key={item.name} className="section field label box has-text-centered" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px', fontSize: '33px', padding: '25px' }}>
           <ListGroup.Item>
             <Badge className='is-pulled-left' style={{ display: 'inline-block', fontSize: '30px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin: '0px' }}>{item.icon}</Badge>

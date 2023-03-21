@@ -84,14 +84,17 @@ const Inventory = () => {
   }
 
   return (
-    <div>
-      <div className="is-flex is-justify-content-center is-align-content-center is-flex-wrap-wrap">
+    <div className=" is-size-5">
+      <div className="has-text-centered ">
+      Equipment
+      </div>
+      <div className="is-flex is-justify-content-center is-align-content-center is-flex-wrap-wrap container" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px',  padding: '25px' }}>
       {Object.keys(inventory).map((key, index) => {
         if (index > 0 && index < 7) {
           return (
             <div className={`dropdown ${activeDropdown === key ? 'is-active' : ''} `} key={key._id}>
               <div className="dropdown-trigger ">
-                <button className="button" onClick={() => handleDropdownClick(key)}>
+                <button className="button is-outlined is-large" onClick={() => handleDropdownClick(key)}>
                   <span>{callKey(key)}</span>
                   <span className="icon is-small">
                     <i className="fas fa-angle-down" aria-hidden="true"></i>
@@ -126,7 +129,7 @@ const Inventory = () => {
         return null;
       })}
       </div>
-      <div className="columns m-6">
+      <div className="columns m-1">
 
       <div className="column is-two-fifths">
         <UserCharacter data={data} />

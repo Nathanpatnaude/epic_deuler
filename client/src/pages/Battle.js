@@ -198,6 +198,9 @@ function Battle() {
                 combatLog: [...battleState.combatLog],
 
             });
+            battleLoad++;
+        } else if (battleLoad === 3) {
+            
         }
     };
 

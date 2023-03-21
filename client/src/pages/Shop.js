@@ -2,7 +2,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_SHOP } from "../utils/gql/queries";
+import { QUERY_SHOP, QUERY_ME } from "../utils/gql/queries";
 import {UPDATE_INVENTORY } from '../utils/gql/mutations';
 import Auth from '../utils/Auth';
 var itemData;
@@ -10,17 +10,21 @@ var itemData;
 
 
 function Shop() {
+    const { loading: loadingMe, data: dataMe, error: errorMe } = useQuery(QUERY_ME);
     const { loading, data: data1, error} = useQuery(QUERY_SHOP);
     const [purchaseItem, { error: purchaseError, data: purchaseData }] = useMutation(UPDATE_INVENTORY);
     var data2;
+    var gold;
     data1? itemData = data1.shop : data2 = loading;
+    dataMe? gold = dataMe.gold: gold = 0;
     console.log(data2);
     console.log(itemData);
     // const itemData = JSON.stringify(shopData.shop)
     
 
     const handlePurchase = async (item) => {
-        console.log(item);
+        console.log(dataMe.me.gold);
+
         const token = Auth.loggedIn() ? Auth.getToken() : null;
         if (!token) {
           return false;
@@ -36,6 +40,14 @@ function Shop() {
         }
       };
 
+      const ifAfforadable = (item) => {
+        if (item.price >= dataMe.me.gold) {
+          return (<Button className='is-pulled-right' style={{ backgroundColor: 'grey', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}💎</Button>)
+        } else {
+          return (<Button className='is-pulled-right' onClick={() => handlePurchase(item._id)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}💎</Button>)
+        }
+
+      }
     return (
         <>
                 {loading ? (
@@ -45,7 +57,8 @@ function Shop() {
                         <ListGroup.Item>
                             <Badge className='is-pulled-left' style={{ display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px' }}>{item.icon}</Badge>
                              {item.name} 
-                             <Button className='is-pulled-right' onClick={() => handlePurchase(item._id)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}💎</Button></ListGroup.Item>
+                             {ifAfforadable(item)}
+                             </ListGroup.Item>
                              
                         
                         <ListGroup.Item className='is-size-5'>{item.description}</ListGroup.Item>

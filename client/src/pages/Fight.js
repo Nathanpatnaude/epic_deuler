@@ -40,13 +40,20 @@ function Fight() {
       ) : ( itemData.map((item) => (
                     <ListGroup key={item.name} className="section field label box has-text-centered" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px', fontSize: '33px', padding:'25px'}}>
                         <ListGroup.Item>
-                            <Badge className='is-pulled-left' style={{ display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px' }}>{item.rating}</Badge>
-                             {item.name} 
-                             <Button className='is-pulled-right' onClick={() => handleFight(item.name)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >FIGHT</Button></ListGroup.Item>
+                            <Badge className='is-pulled-left is-size-5-mobile' style={{ display: 'inline-block', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.2em 0.6em', margin:'0px' }}>{item.rating}</Badge>
+                            <div className="level is-mobile has-text-right">
+                                <div className="level-item is-pulled-left is-size-5-mobile">
+                                     {item.name} 
+                                 </div>
+                                 <div className="level-item is-size-5 is-size-7-mobile">
+                                 Wins: {item.wins} Deaths: {item.deaths}
+                                 </div>
+                                
+                             <Button className='button is-large is-size-5-mobile is-warning is-pulled-right' onClick={() => handleFight(item.name)}  >FIGHT</Button>
+                             </div>
+                             </ListGroup.Item>
                              
                         
-                        <ListGroup.Item className='is-size-5'>{item.wins}</ListGroup.Item>
-                        <ListGroup.Item className='tag is-medium is-info is-pulled-right'>{item.deaths}</ListGroup.Item>
                         
                     </ListGroup>
                 )))
