@@ -19,8 +19,7 @@ const InventoryList = ({ data }) => {
   console.log(itemData);
   // const itemData = JSON.stringify(shopData.shop)
   // const itemList = Object.keys(inventory).map((key, index) => 
-  const equipped = [data1.me.inventory.weapon._id, data1.me.inventory.armor._id, data1.me.inventory.slot1._id, data1.me.inventory.slot2._id, data1.me.inventory.slot3._id, data1.me.inventory.slot4._id];
-  console.log(equipped);
+ 
   const handlePurchase = async (item) => {
     console.log(item);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -41,6 +40,7 @@ const InventoryList = ({ data }) => {
   };
 
   const ifNotEquipped = (itemid) => {
+    const equipped = [data1.me.inventory.weapon._id, data1.me.inventory.armor._id, data1.me.inventory.slot1._id, data1.me.inventory.slot2._id, data1.me.inventory.slot3._id, data1.me.inventory.slot4._id];
     if (!equipped.includes(itemid)) {
     return ( <Button className='is-pulled-right' onClick={() => handlePurchase(itemid)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >Sell💎</Button>
     )
