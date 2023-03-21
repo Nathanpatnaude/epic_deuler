@@ -3,17 +3,17 @@ import './style.css';
 
 const Nav = () => {
   return (
-    <nav class='m-2' role="navigation" aria-label="main navigation">
+    <nav className='m-2' role="navigation" aria-label="main navigation">
 
-      <div id="test" class="navbar-menu columns is-mobile is-shadowless has-background-#ffbc6b">
-        <div class="navbar-start is-centered">
-          <Link to="/inventory" class="navbar-item is-size-3 has-background-#ffbc6b">
+      <div id="test" className="navbar-menu columns is-mobile is-shadowless has-background-#ffbc6b">
+        <div className="navbar-start is-centered">
+          <Link to="/inventory" className="navbar-item is-size-3 has-background-#ffbc6b">
             Inventory
           </Link>
-          <Link to="/fight" class="navbar-item is-size-3 has-background-#ffbc6b">
+          <Link to="/fight" className="navbar-item is-size-3 has-background-#ffbc6b">
             Fight
           </Link>
-          <Link to="/shop" class="navbar-item is-size-3 has-background-#ffbc6b">
+          <Link to="/shop" className="navbar-item is-size-3 has-background-#ffbc6b">
             Shop
           </Link>
         </div>

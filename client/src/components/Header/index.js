@@ -32,16 +32,16 @@ function Header() {
       {isLoggedIn ? (<div className="header is-block">
         <nav className="navbar is-primary is-shadowless is-block"role="navigation" aria-label="main navigation" >
 
-          <h1 class="title is-size-1-fullhd has-text-centered">Epic Dueler</h1>
+          <h1 className="title is-size-1-fullhd has-text-centered">Epic Dueler</h1>
 
 
-          <div id='userHello' class='is-flex is-align-content-flex-end is-pulled-right is-relative-is-mobile'>
+          <div id='userHello' className='is-flex is-align-content-flex-end is-pulled-right is-relative-is-mobile'>
 
-            <div class="subtitle is-size-3 m-3" >
+            <div className="subtitle is-size-3 m-3" >
               Hello, {username}!
             </div>
             <div>
-              <button class="button is-warning mb-4" onClick={handleLogout}>Logout</button>
+              <button className="button is-warning mb-4" onClick={handleLogout}>Logout</button>
             </div>
           </div>
 
@@ -52,10 +52,10 @@ function Header() {
         </nav>
       </div>
       ) : (
-        <div class="has-text-centered has-background-primary">
+        <div className="has-text-centered has-background-primary">
 
-          <div class='intro p-5'>
-            <h1 class='title is-size-2-fullhd pb-6 pt-5'>Epic Dueler</h1>
+          <div className='intro p-5'>
+            <h1 className='title is-size-2-fullhd pb-6 pt-5'>Epic Dueler</h1>
           </div>
         </div>
       )}

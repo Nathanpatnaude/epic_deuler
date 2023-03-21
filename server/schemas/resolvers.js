@@ -251,7 +251,7 @@ const resolvers = {
                     .populate([{ path: 'inventory', populate: [{ path: 'weapon' }, { path: 'armor' }, { path: 'slot1' }, { path: 'slot2' }, { path: 'slot3' }, { path: 'slot4' }, { path: 'bag' }] }]).exec();
 
             } else {
-                const resTax = -(Math.floor(gain / 4));
+                const resTax = -(Math.floor(gain / 7));
                 char = await Character.findOneAndUpdate(
                     { name: name },
                     { $inc: { deaths: 1 , gold: resTax}},

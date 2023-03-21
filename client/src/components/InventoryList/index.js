@@ -18,24 +18,37 @@ const InventoryList = ({ data }) => {
   console.log(data2);
   console.log(itemData);
   // const itemData = JSON.stringify(shopData.shop)
-
-
+  // const itemList = Object.keys(inventory).map((key, index) => 
+  const equipped = [data1.me.inventory.weapon._id, data1.me.inventory.armor._id, data1.me.inventory.slot1._id, data1.me.inventory.slot2._id, data1.me.inventory.slot3._id, data1.me.inventory.slot4._id];
+  console.log(equipped);
   const handlePurchase = async (item) => {
     console.log(item);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if (!token) {
       return false;
     }
-    try {
-      var action = 'sell';
-      const { data } = await sellItem({
-        variables: { itemId: item, action: action },
-      });
+    
+      try {
+        var action = 'sell';
+        const { data } = await sellItem({
+          variables: { itemId: item, action: action },
+        });
 
-    } catch (err) {
-      console.error(JSON.parse(JSON.stringify(err)));
-    }
+      } catch (err) {
+        console.error(JSON.parse(JSON.stringify(err)));
+      }
+    
   };
+
+  const ifNotEquipped = (itemid) => {
+    if (!equipped.includes(itemid)) {
+    return ( <Button className='is-pulled-right' onClick={() => handlePurchase(itemid)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >Sell💎</Button>
+    )
+  } else {
+    return (<Button className='is-pulled-right' style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} ></Button>)
+  }
+  
+  }
   return (
     <>
       {loading ? (
@@ -46,12 +59,13 @@ const InventoryList = ({ data }) => {
           <ListGroup.Item>
             <Badge className='is-pulled-left' style={{ display: 'inline-block', fontSize: '30px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin: '0px' }}>{item.icon}</Badge>
             {item.name}
-            <Button className='is-pulled-right' onClick={() => handlePurchase(item._id)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >Sell💎</Button></ListGroup.Item>
+            {ifNotEquipped(item._id)}
+            </ListGroup.Item>
 
 
           <ListGroup.Item className='is-size-5'>{item.description}</ListGroup.Item>
           <ListGroup.Item className='tag is-medium is-info is-pulled-left'>{item.itemtype}</ListGroup.Item>
-          <ListGroup.Item className='tag is-outline is-medium is-warning is-pulled-right'>{item.price/2}</ListGroup.Item>
+          <ListGroup.Item className='tag is-outline is-medium is-warning is-pulled-right'>{item.price / 2}</ListGroup.Item>
 
         </ListGroup>
       )))
