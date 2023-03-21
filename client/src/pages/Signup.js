@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import '../components/Nav/style.css';
 import { ADD_ACCOUNT, ADD_CHARACTER } from "../utils/gql/mutations";
 import { useMutation } from "@apollo/client";
@@ -37,6 +37,10 @@ const Signup = () => {
       console.error(JSON.parse(JSON.stringify(e)));
     }
   };
+
+  const reloadPage = () => {
+    window.location.reload();
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -90,9 +94,9 @@ const Signup = () => {
             </h4>
             {Auth.loggedIn()? (
                <div className="is-centered">
-               <Link to="/inventory" className="navbar-item is-size-3 has-background-#ffbc6b">
+               <div onClick={reloadPage} className="navbar-item is-size-3 has-background-#ffbc6b">
                  View Character
-               </Link>              
+               </div>              
              </div>
                ) : ( 
               <form onSubmit={handleFormSubmit}>
