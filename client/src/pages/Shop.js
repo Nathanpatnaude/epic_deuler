@@ -41,7 +41,7 @@ function Shop() {
       };
 
       const ifAfforadable = (item) => {
-        if (item.price >= dataMe.me.gold) {
+        if (item.price > dataMe.me.gold) {
           return (<Button className='is-pulled-right' style={{ backgroundColor: 'grey', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}💎</Button>)
         } else {
           return (<Button className='is-pulled-right' onClick={() => handlePurchase(item._id)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}💎</Button>)
