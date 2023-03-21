@@ -81,16 +81,16 @@ const Signup = () => {
       <div className="container">
         <div className="columns is-centered">
           <div className="card-body">
-            <h4 className="label columns is-centered" style={{}}>
+            <h4 className="label columns is-centered is-size-1 is-size-6-mobile">
               Sign Up
             </h4>
               <form onSubmit={handleFormSubmit}>
                 <div className="column is-12">
                   <div className="field">
-                    <label className="label">Username</label>
+                    <label className="label is-size-1 is-size-6-mobile">Username</label>
                     <div className="control">
                       <input
-                        className="input"
+                        className="input is-size-4 is-size-6-mobile"
                         placeholder="Your username"
                         name="username"
                         type="text"
@@ -99,9 +99,9 @@ const Signup = () => {
                       />
                     </div>
                     <div className="field">
-                      <label className="label">Email</label>
+                      <label className="label is-size-1 is-size-6-mobile">Email</label>
                       <input
-                        className="input"
+                        className="input is-size-4 is-size-6-mobile"
                         placeholder="Your email"
                         name="email"
                         type="email"
@@ -109,11 +109,11 @@ const Signup = () => {
                         onChange={handleChange}
                       />
                     </div>
-                    <div className="field">
-                      <label className="label"> Password</label>
+                    <div className="field is-size-3">
+                      <label className="label is-size-1 is-size-6-mobile"> Password</label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="input is-size-4 is-size-6-mobile"
                           placeholder="******"
                           name="password"
                           type="password"
@@ -123,7 +123,7 @@ const Signup = () => {
                       </div>
                     </div>
                     <button
-                      className="button is-info"
+                      className="button is-info is-large is-size-6-mobile"
                       style={{ cursor: "pointer" }}
                       type="submit"
                     >

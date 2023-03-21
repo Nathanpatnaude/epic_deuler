@@ -19,7 +19,7 @@ const Login = (props) => {
       [name]: value,
     });
   };
-  
+
   // Navigate to Inventory page 
   let navigate = useNavigate();
   const routeChange = () => {
@@ -61,10 +61,10 @@ const Login = (props) => {
             <form onSubmit={handleFormSubmit}>
               <div className="column is-12">
                 <div className="field">
-                  <label className="label">Username</label>
+                  <label className="label is-size-1 is-size-6-mobile">Username</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="input is-size-4 is-size-6-mobile"
                       type="test"
                       placeholder="Your Username"
                       name="username"
@@ -74,10 +74,10 @@ const Login = (props) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label">Password</label>
+                  <label className="label is-size-1 is-size-6-mobile">Password</label>
                   <div className="control">
                     <input
-                      className="input"
+                      className="input is-size-4 is-size-6-mobile"
                       type="password"
                       placeholder="******"
                       name="password"
@@ -89,7 +89,7 @@ const Login = (props) => {
                 <div className="field">
                   <div className="control">
                     <button
-                      className="button is-info"
+                      className="button is-info is-large is-size-6-mobile"
                       style={{ cursor: "pointer" }}
                       type="submit"
                     >
@@ -97,9 +97,11 @@ const Login = (props) => {
                     </button>
                   </div>
                 </div>
-                <div><Link to="/signup" >
-                  Create A New Character
-                </Link></div>
+                <div className="is-size-4 is-size-6-mobile">
+                  <Link to="/signup" >
+                    Create A New Character
+                  </Link>
+                </div>
               </div>
             </form>
           </div>

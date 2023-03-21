@@ -14,12 +14,12 @@
 }
 
 .logout-button button {
-   margin: .5rem;
-        
+  margin: .5rem;
+
 }
 
 h1.title {
-  font-size: 4rem;
+  font-size: 2rem;
   color: black;
   font-family: 'Bungee Shade', cursive;
 }
@@ -34,7 +34,20 @@ h1.title {
   display: flex;
   font-size: 2rem !important;
 }
+
 .cont3 {
   display: inline-flex;
-align-items: center;
+  align-items: center;
+}
+
+#userHello {
+  font-size: 0px;
+}
+
+.intro {
+  background-color: orange !important;
+}
+
+.button.is-warning {
+  font-size: 25px;
 }

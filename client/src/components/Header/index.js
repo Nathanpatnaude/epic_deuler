@@ -27,67 +27,41 @@ function Header() {
     setUsername('');
   };
 
-  // return (
-  //   <div>
-  //   {isLoggedIn ? (<div className="header"  >
-  //     <div className=" is-primary" style={{  }} role="navigation" aria-label="main navigation" >
-
-  //         <div className='cont1'>
-  //       <h1 className="title" style={{padding: '25px', top: '15px' }}>Epic Dueler</h1>
-
-
-  //           <div className="" style={{ top: '10px', color: 'black', fontSize: '40px', fontFamily: 'monospace' }}>
-  //             Hello, {username}!
-  //           </div>
-  //           <div className="" >
-  //             <button style={{ width: "5rem", height: "5rem", fontSize: '20px', borderRadius: '100%', left: '2000px', backgroundColor: 'orange', fontFamily: 'monospace' }}
-  //               variant="outline-primary"
-  //               className="rounded-circle" onClick={handleLogout}>Logout</button>
-  //           </div>
-
-  //           <div className='cont2'>
-  //             <Nav />
-  //             {/* <Inventory /> */}
-  //         </div>
-  //         </div>
-  //           </div>
-  //         </div>
-  //       ) : ( 
-  //       <div>
-  //         <h1 className="title" style={{ fontSize: '50px', left: '963px', position: 'absolute', padding: '25px', top: '15px' }}>Epic Dueler</h1>
-  //         </div>
-  //       )}
-
-  //     </div>
-
-  //   );
-  // }
-
   return (
     <div>
-      {isLoggedIn ? (
-        <div className="header">
-          <div className="is-primary container">
-            <div className="cont1">
-              <h1 className="title">Epic Dueler</h1>
-              <div className="cont3">
-                <div className="username">Hello, {username}!</div>
-                <div className="logout-button">
-                  <button className="button" onClick={handleLogout}>Logout</button>
-                </div>
-              </div>
+      {isLoggedIn ? (<div className="header is-block">
+        <nav className="navbar is-primary is-shadowless is-block"role="navigation" aria-label="main navigation" >
+
+          <h1 class="title is-size-1-fullhd has-text-centered">Epic Dueler</h1>
+
+
+          <div id='userHello' class='is-flex is-align-content-flex-end is-pulled-right is-relative-is-mobile'>
+
+            <div class="subtitle is-size-3 m-3" >
+              Hello, {username}!
             </div>
-            <div className="cont2">
-              <Nav />
+            <div>
+              <button class="button is-warning mb-4" onClick={handleLogout}>Logout</button>
             </div>
           </div>
-        </div>
+
+          <div>
+            <Nav />
+            {/* <Inventory /> */}
+          </div>
+        </nav>
+      </div>
       ) : (
-        <div className="header">
-          <h1 className="title">Epic Dueler</h1>
+        <div class="has-text-centered has-background-primary">
+
+          <div class='intro p-5'>
+            <h1 class='title is-size-2-fullhd pb-6 pt-5'>Epic Dueler</h1>
+          </div>
         </div>
       )}
+
     </div>
+
   );
 };
 

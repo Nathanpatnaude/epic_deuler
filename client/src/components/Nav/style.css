@@ -4,7 +4,7 @@ nav {
 
 .navbar-item {
   background-color: orange !important;
-  color: white;
+  color: white !important;
   border-radius: 50% !important;
   font-size: "200px";
   padding: "300px" !important;
@@ -23,6 +23,12 @@ nav {
 }
 
 .navbar-start {
+  background-color: orange !important;
   padding: "15px" !important;
   font-size: "3rem" !important;
+}
+
+.navbar-menu {
+  background-color: orange !important;
+  font-family: 'Rowdies', cursive !important;
 }
