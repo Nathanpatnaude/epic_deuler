@@ -1,27 +1,31 @@
 .header {
-  background-color: orange;
+  background-color: #a335ee;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 0px;
+  border-bottom: 4px;
+  border-style: solid;
+  border-color: black;
   padding: 25px;
 }
 
 .username {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: black;
   margin: .5rem;
 }
 
-.logout-button button {
-  margin: .5rem;
 
-}
-
-h1.title {
-  font-size: 2rem;
+.tittle {
+  margin-top: -80px;
+  margin-bottom: -40px;
+  font-size: 8rem;
   color: black;
-  font-family: 'Bungee Shade', cursive;
+  text-shadow: 2px 2px 10px #ffffff;
+  font-family: myFirstFont, cursive;
+  
 }
 
 .cont1 {
@@ -45,9 +49,40 @@ h1.title {
 }
 
 .intro {
-  background-color: orange !important;
+  background-color: #a335ee !important;
 }
 
-.button.is-warning {
-  font-size: 25px;
+.logout {
+  margin-right: -8px;
+  max-height: 100%;
+  
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(./Flesh\ Wound.ttf);
+}
+
+@media only screen and (max-width: 769px)  {
+  h1.tittle {
+    margin-top: -30px;
+    margin-bottom: -40px;
+    margin-left: -5px;
+    font-size: 4rem;
+    color: black;
+    font-family: myFirstFont, cursive;
+  }
+
+  .logout {
+    margin-right: -12px;
+    margin-top: 8px;
+    display: flex;
+  }
+
+  .username {
+    visibility: hidden;
+    font-size: .000002rem;
+    color: black;
+    margin: .0002rem;
+  }
 }

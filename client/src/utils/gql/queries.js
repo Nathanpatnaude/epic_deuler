@@ -193,7 +193,27 @@ export const QUERY_CHARACTERS = gql`
       name
       wins
       deaths
-      rating       
+      rating
+      inventory {
+        weapon {
+          icon
+        }
+        armor {
+          icon
+        }
+        slot1 {
+          icon
+        }
+        slot2 {
+          icon
+        }
+        slot3 {
+          icon
+        }
+        slot4 {
+          icon
+        }
+      }      
     }
   }
 `;

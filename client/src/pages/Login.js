@@ -57,11 +57,12 @@ const Login = (props) => {
     <>
       <section className="section">
         <div className="container">
-          <div className="columns is-centered">
+          <div className="columns is-centered box has-text-centered">
             <form onSubmit={handleFormSubmit}>
+            <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}>🏰</h1>
               <div className="column is-12">
                 <div className="field">
-                  <label className="label is-size-1 is-size-6-mobile">Username</label>
+                  <label className="label is-size-3 is-size-6-mobile">Username</label>
                   <div className="control">
                     <input
                       className="input is-size-4 is-size-6-mobile"
@@ -74,7 +75,7 @@ const Login = (props) => {
                   </div>
                 </div>
                 <div className="field">
-                  <label className="label is-size-1 is-size-6-mobile">Password</label>
+                  <label className="label is-size-3 is-size-6-mobile">Password</label>
                   <div className="control">
                     <input
                       className="input is-size-4 is-size-6-mobile"
@@ -89,11 +90,11 @@ const Login = (props) => {
                 <div className="field">
                   <div className="control">
                     <button
-                      className="button is-info is-large is-size-6-mobile"
-                      style={{ cursor: "pointer" }}
+                      className="button is-primary is-size-3 is-size-5-mobile" style={{ color: 'black', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px', borderBottom: '8px', borderBottomStyle: 'solid' }}
                       type="submit"
                     >
-                      Submit
+                      ✅
+                  Login
                     </button>
                   </div>
                 </div>

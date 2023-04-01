@@ -42,10 +42,10 @@ const InventoryList = ({ data }) => {
   const ifNotEquipped = (itemid) => {
     const equipped = [data1.me.inventory.weapon._id, data1.me.inventory.armor._id, data1.me.inventory.slot1._id, data1.me.inventory.slot2._id, data1.me.inventory.slot3._id, data1.me.inventory.slot4._id];
     if (!equipped.includes(itemid)) {
-    return ( <Button className='is-pulled-right' onClick={() => handlePurchase(itemid)} style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >Sell💎</Button>
+    return ( <Button className='is-pulled-right' onClick={() => handlePurchase(itemid)} style={{ backgroundColor: '#0070dd', textShadow:'2px 2px 10px #ffffff', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >Sell💎</Button>
     )
   } else {
-    return (<Button className='is-pulled-right' style={{ backgroundColor: 'orange', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} ></Button>)
+    return (<Button className='is-pulled-right' style={{ backgroundColor: '#0070dd', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} ></Button>)
   }
   
   }
@@ -60,7 +60,7 @@ const InventoryList = ({ data }) => {
         
         <ListGroup key={item.name} className="section field label box has-text-centered" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px', fontSize: '33px', padding: '25px' }}>
           <ListGroup.Item>
-            <Badge className='is-pulled-left' style={{ display: 'inline-block', fontSize: '30px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin: '0px' }}>{item.icon}</Badge>
+            <Badge className='is-pulled-left pb-2 equip' style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '30px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin: '0px', marginTop: '-16px', borderBottom: '16px', borderBottomStyle: 'solid' }}>{item.icon}</Badge>
             {item.name}
             {ifNotEquipped(item._id)}
             </ListGroup.Item>

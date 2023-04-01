@@ -29,7 +29,7 @@
         "itemtype": "weapon",
         "price": 300,
         "value": "attack.3,defense.2",
-        "description": "Sometimes defense is the best offense. Damage: 4-7"
+        "description": "Sometimes defense is the best offense. Damage: 4-7, Defense + 2"
     },
     {
         "name": "Spear",
@@ -101,7 +101,7 @@
         "itemtype": "armor",
         "price": 100,
         "value": "defense.2",
-        "description": "Another creatures old skin. Defense + 1"
+        "description": "Another creatures old skin. Defense + 2"
     },
     {
         "name": "Ringmail",

@@ -41,7 +41,7 @@ const resolvers = {
         },
 
         characters: async (parent, args, context) => {
-            return Character.find({ name: { $ne: context.account.username } });
+            return Character.find({ name: { $ne: context.account.username } }).populate("statblock").populate("inventory").populate([{ path: 'inventory', populate: [{ path: 'weapon' }, { path: 'armor' }, { path: 'slot1' }, { path: 'slot2' }, { path: 'slot3' }, { path: 'slot4' }, { path: 'bag' }] }]).exec();
         },
 
     },
@@ -100,10 +100,10 @@ const resolvers = {
             const newItem = await Item.findOne({ _id: itemId });
             var cost = 0;
             var ratingChange = 0;
-            const characterData = await Character.findOne({ name: context.account.username });            
-            
+            const characterData = await Character.findOne({ name: context.account.username });
+
             const inventory = await Inventory.findOne({ _id: characterData.inventory });
-           
+
 
             var newItemStat;
             var oldItem;  // the item in slot
@@ -129,8 +129,8 @@ const resolvers = {
                         oldItem = await Item.findOne({ _id: inventory.slot4 });
                         break;
                 }
-                
-                if (oldItem.name != 'None' && oldItem._id != newItem._id) {
+
+                if (oldItem.name != 'None') {
                     oldStat = oldItem.value.split(',');
                     for (let i = 0; i < oldStat.length; i++) {
                         var stat = oldStat[i].split('.');
@@ -167,11 +167,11 @@ const resolvers = {
                                 ratingChange += changeAdd;
                             }
                             console.log('inc', stat[0], changeAdd, ratingChange);
-                                await StatBlock.findOneAndUpdate(
-                                    { _id: characterData.statblock },
-                                    { $inc: { [`${stat[0]}`]: changeAdd } }
-                                );                            
-                        };                        
+                            await StatBlock.findOneAndUpdate(
+                                { _id: characterData.statblock },
+                                { $inc: { [`${stat[0]}`]: changeAdd } }
+                            );
+                        };
                         await Inventory.findOneAndUpdate(
                             { _id: characterData.inventory },
                             { $set: { [`${slot}`]: itemId } },
@@ -184,6 +184,24 @@ const resolvers = {
                             { new: true }
                         );
                     };
+
+                    console.log(ratingChange);
+                    return await Character.findOneAndUpdate(
+                        { name: context.account.username },
+                        { $inc: { rating: parseInt(ratingChange) } },
+                        { new: true }
+                    ).populate("inventory")
+                        .populate("statblock")
+                        .populate([{ path: 'inventory', populate: [{ path: 'weapon' }, { path: 'armor' }, { path: 'slot1' }, { path: 'slot2' }, { path: 'slot3' }, { path: 'slot4' }, { path: 'bag' }] }]).exec();
+                case 'remove':
+                    //
+
+                    await Inventory.findOneAndUpdate(
+                        { _id: characterData.inventory },
+                        { $set: { [`${slot}`]: emptyItem._id } },
+                        { new: true }
+                    );
+
 
                     console.log(ratingChange);
                     return await Character.findOneAndUpdate(
@@ -254,7 +272,7 @@ const resolvers = {
                 const resTax = -(Math.floor(gain / 7));
                 char = await Character.findOneAndUpdate(
                     { name: name },
-                    { $inc: { deaths: 1 , gold: resTax}},
+                    { $inc: { deaths: 1, gold: resTax } },
                     { new: true }
                 ).populate("inventory")
                     .populate("statblock")

@@ -39,7 +39,6 @@ class Combatant {
 
     var logArray = [];
     var nextAction = '';
-    var damageTarget = '';
 
     if (hit > defense + target.parry || (hit >= 20 - this.crit && defense != hit)) {
       // HIT or CRITICAL(!PARRY)
@@ -59,24 +58,24 @@ class Combatant {
           if (defense > hit) {
             // higher defense roll recieves additional .crit bonus
             bash += Math.floor(Math.random() * target.crit) + 1;
-            logArray.push({ "action": `🎯 MUTUAL CRITICAL! 🛡️`, "bulma": critLogCss });
+            logArray.push({ "action": `🎯 MUTUAL CRITICAL! 🛡️`, "bulma": `${critLogCss} pop-crit`});
           } else {
             // higher hit roll recieves additional .crit bonus
             damage += Math.floor(Math.random() * this.crit) + 1;
-            logArray.push({ "action": `🎯 MUTUAL CRITICAL! 🗡️`, "bulma": critLogCss });
+            logArray.push({ "action": `🎯 MUTUAL CRITICAL! 🗡️`, "bulma": `${critLogCss} pop-crit`});
           }
-          logArray.push({ "action": `${this.name} 🎯🗡️ BRUTAL STRIKE!`, "bulma": this.logCss });
+          // logArray.push({ "action": `${this.name} 🎯🗡️ BRUTAL STRIKE!`, "bulma": this.logCss });
           if (damage <= 0) {
-            logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": target.logCss });
+            logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": `${target.logCss} pop-outin-block`});
           } else {
             target.hitpoints -= damage;
-            logArray.push({ "action": `${target.name} 🩸 ${damage} DAMAGE!`, "bulma": target.logCss });
+            logArray.push({ "action": `${target.name} 🩸 ${damage} DAMAGE!`, "bulma": `${target.logCss} pop-outin`});
           }
 
           if (target.hitpoints > 0) {
-            logArray.push({ "action": `${target.name} 🎯🛡️ PERFECT DEFENSE!`, "bulma": target.logCss });
+            // logArray.push({ "action": `${target.name} 🎯🛡️ PERFECT DEFENSE!`, "bulma": target.logCss });
             this.hitpoints -= bash;
-            logArray.push({ "action": `${this.name} 💥 ${bash} DAMAGE!`, "bulma": this.logCss });
+            logArray.push({ "action": `${this.name} 💥 ${bash} DAMAGE!`, "bulma": `${this.logCss} pop-outin-bash`});
             if (action === 'opportunity') {
               nextAction = 'roll';
             } else {
@@ -96,17 +95,17 @@ class Combatant {
           // CRITICAL additional damage is max.strength on a low defense roll
           // this effect range is reduced by the 1/3target's.strength + .def +.parry and increased by 2*attackers.crit
           damage += this.strength + this.crit;
-          logArray.push({ "action": `🎯 CRITICAL HIT! 🗡️`, "bulma": `${this.logCss} ${critLogCss}` });
-          logArray.push({ "action": `${this.name} 🎯🗡️ BRUTAL STRIKE!`, "bulma": this.logCss });
+          logArray.push({ "action": `🎯 CRITICAL HIT! 🗡️`, "bulma": `${this.logCss} ${critLogCss} pop-crit` });
+          // logArray.push({ "action": `${this.name} 🎯🗡️ BRUTAL STRIKE!`, "bulma": this.logCss });
         } else {
           damage += Math.floor(Math.random() * this.strength) + Math.floor(Math.random() * this.crit) + 1;
-          logArray.push({ "action": `🎯 CRITICAL HIT! 🗡️`, "bulma": `${this.logCss} ${critLogCss}` });
-          logArray.push({ "action": `${this.name} 🎯🗡️ BRUTAL STRIKE!`, "bulma": this.logCss });
+          logArray.push({ "action": `🎯 CRITICAL HIT! 🗡️`, "bulma": `${this.logCss} ${critLogCss} pop-crit` });
+          // logArray.push({ "action": `${this.name} 🎯🗡️ BRUTAL STRIKE!`, "bulma": this.logCss });
         }
       }
 
       if (damage <= 0) {
-        logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": target.logCss });
+        logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": `${target.logCss} pop-outin-block`});
         if (action === 'opportunity') {
           nextAction = 'roll';
         } else {
@@ -116,7 +115,7 @@ class Combatant {
       } else {
         target.hitpoints -= damage;
 
-        logArray.push({ "action": `${target.name} 🩸 ${damage} DAMAGE!`, "bulma": target.logCss });
+        logArray.push({ "action": `${target.name} 🩸 ${damage} DAMAGE!`, "bulma": `${target.logCss} pop-outin`});
         if (action === 'opportunity') {
           nextAction = 'roll';
         } else {
@@ -130,37 +129,37 @@ class Combatant {
       // PARRY occurs when hit = defense 
       if (defense >= 20 - target.crit - target.parry) {
         // CRITICAL PARRY (range increased by crit or parry stat)
-        logArray.push({ "action": `🎯 CRITICAL PARRY! ⚔️`, "bulma": `${target.logCss} ${critLogCss}` });
+        logArray.push({ "action": `🎯 CRITICAL PARRY! ⚔️`, "bulma": `${target.logCss} ${critLogCss} pop-crit` });
         var glance = Math.floor(Math.random() * target.strength / 2) + 1 + target.parry + target.atk - this.def;
-        logArray.push({ "action": `${target.name} ⚔️🎯 RETALIATES! `, "bulma": target.logCss });
+        // logArray.push({ "action": `${target.name} ⚔️🎯 RETALIATES! `, "bulma": target.logCss });
         if (glance <= 0) {
-          logArray.push({ "action": `${this.name} ⚔️ DEFLECTED!`, "bulma": this.logCss });
+          logArray.push({ "action": `${this.name} ⚔️ DEFLECTED!`, "bulma": `${this.logCss} pop-outin-block`});
         } else {
           this.hitpoints -= glance;
-          logArray.push({ "action": `${this.name} ⚔️ ${glance} DAMAGE!`, "bulma": this.logCss });
+          logArray.push({ "action": `${this.name} ⚔️ ${glance} DAMAGE!`, "bulma": `${this.logCss} pop-outin-glance`});
         }
         if (this.hitpoints > 0) {
           if (hit >= 20 - this.crit - this.parry) {
             // CRITICAL RETALIATION (if oppenents parry is also a CRITICAL)
-            logArray.push({ "action": `${this.name} ⚔️🎯 RETALIATES! `, "bulma": this.logCss });
-            var glance = Math.floor(Math.random() * this.strength / 2) + 1 + this.parry + this.atk - target.def;
+            // logArray.push({ "action": `${this.name} ⚔️🎯 RETALIATES! `, "bulma": this.logCss });
+            var glance2 = Math.floor(Math.random() * this.strength / 2) + 1 + this.parry + this.atk - target.def;
 
-            if (glance <= 0) {
-              logArray.push({ "action": `${target.name} ⚔️ DEFLECTED!`, "bulma": target.logCss });
+            if (glance2 <= 0) {
+              logArray.push({ "action": `${target.name} ⚔️ DEFLECTED!`, "bulma": `${target.logCss} pop-outin-block`});
             } else {
-              target.hitpoints -= glance;
-              logArray.push({ "action": `${target.name} ⚔️ ${glance} DAMAGE!`, "bulma": target.logCss });
+              target.hitpoints -= glance2;
+              logArray.push({ "action": `${target.name} ⚔️ ${glance2} DAMAGE!`, "bulma": `${target.logCss} pop-outin-glance`});
             }
           }
         } else {
-          logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
+          // logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
           nextAction = 'dead';
           return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
         }
 
       } else {
         // PARRY
-        logArray.push({ "action": `${target.name} ⚔️ PARRY!`, "bulma": target.logCss });
+        logArray.push({ "action": `${target.name} ⚔️ PARRY!`, "bulma": `${target.logCss} pop-outin-glance` });
       }
       // PARRY results in a INITIATIVE ROLL to reset turn order
       if (target.hitpoints > 0 && this.hitpoints > 0) {
@@ -169,11 +168,11 @@ class Combatant {
 
       } else if (target.hitpoints <= 0) {
         nextAction = 'dead';
-        logArray.push({ "action": `${target.name} STUMBLES!`, "bulma": target.logCss });
+        // logArray.push({ "action": `${target.name} STUMBLES!`, "bulma": target.logCss });
         return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
       } else {
         nextAction = 'dead';
-        logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
+        // logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
         return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
       }
 
@@ -182,42 +181,42 @@ class Combatant {
       if (hit === 1) {
         // CRITICAL MISS (only roll of 1) causes OPPORTUNITY ATTACK
         // OPPORTUNITY ATTACK is a bonus attack that does not alter turn order
-        logArray.push({ "action": `🎯 CRITICAL MISS! 💨`, "bulma": `${this.logCss} ${critLogCss}` });
-        logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
-        logArray.push({ "action": `${target.name} ☄️ OPPORTUNITY ATTACK!`, "bulma": target.logCss });
+        logArray.push({ "action": `🎯 CRITICAL MISS! 💨`, "bulma": `${this.logCss} ${critLogCss} pop-crit` });
+        // logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
+        logArray.push({ "action": `${target.name} ☄️ OPPORTUNITY ATTACK!`, "bulma": `${target.logCss} pop-outin-block`});
         if (action === 'opportunity') {
           nextAction = 'endTurn';
         } else {
-          nextAction = 'opportunity';
+          nextAction = 'opportunityRoll';
         };
         return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
       } else if (defense >= 20 - target.crit) {
         // CRITICAL BLOCK (range increased by crit stat)
-        logArray.push({ "action": `🎯 CRITICAL BLOCK! 🛡️`, "bulma": `${target.logCss} ${critLogCss}` });
-        logArray.push({ "action": `${target.name} 🎯🛡️ PERFECT DEFENSE!`, "bulma": target.logCss });
+        logArray.push({ "action": `🎯 CRITICAL BLOCK! 🛡️`, "bulma": `${target.logCss} ${critLogCss} pop-crit` });
+        // logArray.push({ "action": `${target.name} 🎯🛡️ PERFECT DEFENSE!`, "bulma": target.logCss });
         if (hit <= (target.def * 2) + Math.floor(Math.random(target.strength / 2)) + target.crit) {
           // BASH occurs when the blocked attack roll is lower than the combined defenders strength and defense
           // BASH damage is based on the defenders def value
-          var bash = Math.floor(Math.random() * target.def) + 1 + Math.floor(Math.random() * target.crit);
+          var bash3 = Math.floor(Math.random() * target.def) + 1 + Math.floor(Math.random() * target.crit);
 
-          if (bash > 0) {
-            this.hitpoints -= bash;
-            logArray.push({ "action": `${this.name} 💥 ${bash} DAMAGE!`, "bulma": this.logCss });
+          if (bash3 > 0) {
+            this.hitpoints -= bash3;
+            logArray.push({ "action": `${this.name} 💥 ${bash3} DAMAGE!`, "bulma": `${this.logCss} pop-outin-bash`});
           }
         }
         if (this.hitpoints > 0) {
           //CRITICAL BLOCK results in an OPPORTUNITY ATTACK
           //OPPORTUNITY ATTACK is a bonus attack that does not alter turn order
-          logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
-          logArray.push({ "action": `${target.name} ☄️ OPPORTUNITY ATTACK!`, "bulma": target.logCss });
+          // logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
+          logArray.push({ "action": `${target.name} ☄️ OPPORTUNITY ATTACK!`, "bulma": `${target.logCss} pop-outin-block`});
           if (action === 'opportunity') {
             nextAction = 'endTurn';
           } else {
-            nextAction = 'opportunity';
+            nextAction = 'opportunityRoll';
           };
           return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
         } else {
-          logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
+          // logArray.push({ "action": `${this.name} STUMBLES!`, "bulma": this.logCss });
           nextAction = 'dead';
           return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
         }
@@ -225,9 +224,9 @@ class Combatant {
         //GLANCING ATTACK results in a halved attack if the HIT and DEFENSE rolls were close
         //GLANCING ATTACK range is increased by the Attacker's.strength and reduced by defender's.def
         //bigger weapons have a higher chance to cause partial damage vs low .def
-        var glance = Math.floor(Math.random() * this.strength / 2) + 1 + this.atk - target.def;
-        if (glance <= 0) {
-          logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": target.logCss });
+        var glance3 = Math.floor(Math.random() * this.strength / 2) + 1 + this.atk - target.def;
+        if (glance3 <= 0) {
+          logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": `${target.logCss} pop-outin-block`});
           if (action === 'opportunity') {
             nextAction = 'roll';
           } else {
@@ -235,8 +234,8 @@ class Combatant {
           };
           return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
         } else {
-          target.hitpoints -= glance;
-          logArray.push({ "action": `${target.name} 💫 ${glance} DAMAGE!`, "bulma": target.logCss });
+          target.hitpoints -= glance3;
+          logArray.push({ "action": `${target.name} 💫 ${glance3} DAMAGE!`, "bulma": `${target.logCss} pop-outin-glance`});
           if (action === 'opportunity') {
             nextAction = 'roll';
           } else {
@@ -246,7 +245,7 @@ class Combatant {
         }
       } else {
         // BLOCK the attack did not land or do any damage
-        logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": target.logCss });
+        logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": `${target.logCss} pop-outin-block`});
         if (action === 'opportunity') {
           nextAction = 'roll';
         } else {

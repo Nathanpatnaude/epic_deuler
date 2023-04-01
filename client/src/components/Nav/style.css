@@ -1,34 +1,32 @@
 nav {
-  background-color: orange !important;
+  background-color: #a335ee !important;
 }
 
 .navbar-item {
-  background-color: orange !important;
-  color: white !important;
-  border-radius: 50% !important;
-  font-size: "200px";
-  padding: "300px" !important;
+  background-color: rgb(248, 248, 248) !important;
+  color: rgb(0, 0, 0) !important;
+  max-height: 50px;
+
+  font-family: 'Rowdies', cursive !important;
 }
 
 .navbar-item.active {
-  background-color: orange !important;
+  background-color: rgb(141, 238, 255) !important;
   color: white !important;
-  border-radius: 50% !important;
 }
 
 .navbar-item:hover {
   background-color: white !important;
-  color: orange !important;
-  border-radius: 50% !important;
+  color: #0070dd !important;
 }
 
 .navbar-start {
-  background-color: orange !important;
+  background-color: #a335ee !important;
   padding: "15px" !important;
   font-size: "3rem" !important;
 }
 
 .navbar-menu {
-  background-color: orange !important;
+  background-color: #a335ee !important;
   font-family: 'Rowdies', cursive !important;
 }

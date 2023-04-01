@@ -14,6 +14,17 @@
     scroll-snap-align: start;
 }
 
+
+.equip:hover {
+  background-color: white !important;
+  color: grey !important;
+}
+
+.dropdown:hover {
+  background-color: #0070dd !important;
+  color: black !important;
+}
+
 .fighter {
     width: 50%;
 }
@@ -22,6 +33,10 @@
     width:100%;
 }
 
+.welcome {
+  font-family: myFirstFont, cursive;
+  font-size: 4rem;
+}
 
 #health {
     width: 100%;
@@ -30,3 +45,255 @@
 .container, .button {
     font-family: 'Rowdies', cursive !important;
 }
+
+.playerAttack {
+  animation: .3s anim-playerAttack linear;
+}
+@keyframes anim-playerAttack {
+  0% { opacity: 1; transform: translateX(0%);}
+  25% { opacity: 1; transform: translateX(250%);}
+  50% { opacity: .5; transform: translateX(50%);
+  }
+  100% {
+  }
+}
+
+.opponentAttack {
+  animation: .3s anim-opponentAttack linear;
+}
+@keyframes anim-opponentAttack {
+  0% { opacity: 1; transform: translateX(0%);}
+  25% { opacity: 1; transform: translateX(-250%);}
+  50% { opacity: .5; transform: translateX(50%);
+  }
+  100% {
+  }
+}
+.pop-outin {
+    animation: .5s anim-popoutin ease;
+  }
+  
+  @keyframes anim-popoutin {
+    0% {
+      color: black;
+      transform: scaleY(12);
+      opacity: 1;
+      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    25% {
+      color: red;
+      transform: scaleY(7);
+      opacity: 1;
+      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      color: red;
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+
+  .pop-outin-bash {
+    animation: .5s anim-pop-outin-bash ease;
+  }
+  
+  @keyframes anim-pop-outin-bash {
+    0% {
+      color: black;
+      transform: scaleY(12);
+      opacity: 1;
+      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    25% {
+      color: rgb(0, 225, 255);
+      transform: scaleY(7);
+      opacity: 1;
+      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      color: rgb(0, 225, 255);
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+
+  .pop-outin-glance {
+    animation: .5s anim-pop-outin-glance ease;
+  }
+  
+  @keyframes anim-pop-outin-glance {
+    0% {
+      color: black;
+      transform: scaleY(12);
+      opacity: 1;
+      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    25% {
+      color: rgb(255, 255, 0);
+      transform: scaleY(7);
+      opacity: 1;
+      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      color: rgb(255, 255, 0);
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+
+  .pop-outin-block {
+    animation: .5s anim-pop-outin-block ease;
+  }
+  
+  @keyframes anim-pop-outin-block {
+    0% {
+      color: black;
+      transform: scaleY(12);
+      opacity: 1;
+      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    25% {
+      color: rgb(143, 243, 243);
+      transform: scaleY(7);
+      opacity: 1;
+      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      color: rgb(0, 225, 255);
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+
+  .pop-crit {
+    animation: .5s anim-pop-crit linear;
+  }
+  
+  @keyframes anim-pop-crit {
+    0% {
+      color: black;
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+    25% {
+      color: rgb(241, 247, 160);
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+    50% {
+      color: rgb(255, 255, 0);
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+  }
+
+  .pop-hp {
+    animation: .5s anim-pop-hp linear;
+  }
+  
+  @keyframes anim-pop-hp {
+    0% {
+      color: rgb(211, 198, 198);
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+    25% {
+      color: red;
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+    50% {
+      color: red;
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(100%);
+      opacity: 1;
+
+    }
+  }
+
+  .fromleft {
+    animation: 1s anim-fromleft linear;
+  }
+  @keyframes anim-fromleft {
+    0% { opacity: 0; transform: translateX(-100%);}
+    25% { opacity: 1; transform: translateX(0%);}
+    50% {
+    }
+    100% {
+    }
+  }
+
+  .fromright {
+    animation: 1s anim-fromright linear;
+  }
+  @keyframes anim-fromright {
+    0% { opacity: 0; transform: translateX(1000px); text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);}
+    25% { opacity: 1; transform: translateX(0%);}
+    50% {
+    }
+    100% {
+    }
+  }
+
+  
+
+  .fromtop {
+    animation: .2s anim-fromtop linear;
+  }
+  @keyframes anim-fromtop {
+    0% { opacity: 0; transform: translateY(100%);}
+    25% { opacity: 1; transform: translateY(0%);}
+    50% {
+    }
+    100% {
+    }
+  }
+
+  @font-face {
+    font-family: myFirstFont;
+    src: url(./components/Header/Flesh\ Wound.ttf);
+  }

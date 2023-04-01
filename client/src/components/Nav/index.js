@@ -2,20 +2,31 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 const Nav = () => {
+
   return (
     <nav className='m-2' role="navigation" aria-label="main navigation">
 
       <div id="test" className="navbar-menu columns is-mobile is-shadowless has-background-#ffbc6b">
-        <div className="navbar-start is-centered">
-          <Link to="/inventory" className="navbar-item is-size-3 has-background-#ffbc6b">
-            Inventory
+        <div className=" tabs is-toggle is-toggle-rounded " style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
+          <ul>
+            <li className=""> 
+             
+          <Link to="/inventory" className="button navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
+          🏰Home
           </Link>
-          <Link to="/fight" className="navbar-item is-size-3 has-background-#ffbc6b">
-            Fight
+
+          </li>
+          <li>
+          <Link to="/fight" className=" navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
+          ⚔️Fight
           </Link>
-          <Link to="/shop" className="navbar-item is-size-3 has-background-#ffbc6b">
-            Shop
+          </li>
+          <li>
+          <Link to="/shop" className="navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
+          💰Shop
           </Link>
+          </li>
+          </ul>
         </div>
 
       </div>
