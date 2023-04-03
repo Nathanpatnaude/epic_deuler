@@ -57,11 +57,21 @@ function Fight() {
 
     const opponentCss = (rating, ratingMe) => {
         if (rating < (ratingMe - 3)) {
-           return 'is-success button is-large is-size-5-mobile is-pulled-right';
+           return 'is-dark button is-large is-size-5-mobile sell';
         } else if (rating > (ratingMe + 3)) {
-            return 'is-danger button is-large is-size-5-mobile is-pulled-right';
+            return 'is-danger button is-large is-size-5-mobile sell';
         } else {
-            return 'is-warning button is-large is-size-5-mobile is-pulled-right';
+            return 'is-warning button is-large is-size-5-mobile sell';
+        }
+    }
+
+    const opponentStyle = (rating, ratingMe) => {
+        if (rating < (ratingMe - 3)) {
+           return {backgroundColor: `#9d9d9d`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px'};
+        } else if (rating > (ratingMe + 3)) {
+            return {backgroundColor: `#a335ee`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px'};
+        } else {
+            return {backgroundColor: `#0070dd`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px'};
         }
     }
     const handleFight = async (opponent) => {
@@ -74,53 +84,58 @@ function Fight() {
 
     return (
         <>
+        <div className="has-text-centered ">
+      <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid'}}>⚔️</h1>
+      </div>
                 {loading || loadingMe? (
         <div>Loading...</div>
       ) : ( 
-        <div className='container' style={{ maxWidth: '800px'}}>
+        <div className='m-0'>
+             <ListGroup key='opponents' className="is-flex section field label box has-text-centered px-0 py-2 is-flex-wrap-wrap" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px', fontSize: '33px'}}>
+                        
                  {sortOpponents(opponentData).map((opponent) => (
-                    
-                    <ListGroup key={opponent.name} className="section field label box has-text-centered" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px', fontSize: '33px', padding:'12px'}}>
-                        <ListGroup.Item>
+                   
                            
-                            <div className="level has-text-right is-mobile">
-                                 
-                                <div className="is-block has-text-left level-item is-pulled-left is-size-5-mobile"> 
-                                
-                                <div className=''>
-                                    <div className='p-1 mb-1'>
-                                        {opponent.name.charAt(0).toUpperCase() + opponent.name.slice(1)} 
-                                    </div>
-                                    <div className='columns is-mobile p-2'>
-                                    <Badge className='is-size-4-mobile' style={{backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', display: 'inline-block', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.2em 0.6em', marginTop: '-2px', marginLeft: '5px', marginRight: '13px', marginBottom: '8px' }}>{opponent.rating}</Badge>
-
-                                    <div className="is-size-4  is-size-6-mobile pb-1" style={{ backgroundColor: '#0070dd', textShadow: '2px 2px 10px #ffffff', display: 'inline-block', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', marginBottom: '8px', borderBottom: '8px', borderBottomStyle: 'solid'  }}>
-                                        {getPlayerIcon(opponent.inventory.armor.icon, 'armor')}
-                                        </div>
-                                        <div className="is-size-4  is-size-6-mobile pb-1" style={{ backgroundColor: '#0070dd', textShadow: '2px 2px 10px #ffffff', display: 'inline-block', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', marginBottom: '8px', borderBottom: '8px', borderBottomStyle: 'solid'  }}>
-                                        {getPlayerIcon(opponent.inventory.weapon.icon, 'weapon')}
-                                        </div>
-                                    </div>
-                                     
-                                     </div>
-                                 </div>
-                                 <div className=''>
-                                <div className=" is-size-5 is-size-7-mobile">
-                                 Wins: {opponent.wins}
-                                 </div>
-                                 <div className="is-size-5 is-size-7-mobile">
-                                 Deaths: {opponent.deaths}
-                                 </div>
-                                 </div>
-                            <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', marginRight: '-7px', marginLeft: '5px'}}>FIGHT</Button>
-                             </div>
-                             </ListGroup.Item>
-                             
-                        
-                        
-                    </ListGroup>
+                   <div className={`dropdown pr-0 m-1 has-text-centered is-block`} key={opponent._id} style={opponentStyle(opponent.rating, dataMe.me.rating)}>
+              <div className='columns column p-0 m-0 is-full is-mobile' style={{ height: '240px'}}>
+                <div className=' pl-1 py-4' style={{ width: '148px' }}>               
+                 <span className='button mb-2 is-size-5 p-1 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '4rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '316px', fontWeight: 'bold' }}>{opponent.name}</span>
+                  <div className="mt-1 mb-2">
+                  
+                    <div className="bauble equip is-size-3 pl-4 pr-4 pb-1 pt-3">
+                      <span>{getPlayerIcon(opponent.inventory.armor.icon, 'armor')}</span>
+                    </div>
+                  
+                  </div>
+                 
+                  <div className="tag has-text-centered is-warning is-large">
+                    {opponent.rating}
+                  </div>
+                </div>
+                <div className='column px-1' style={{ paddingTop: '5.5rem'}}>
+                  <ListGroup.Item className=" container box has-text-weight-bold is-size-5 has-text-centered pt-1 pb-0 px-2 mr-1" style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '20px', height: '100%'}}>
+                    <div className='p-1 columns is-gapless is-block' style={{ marginLeft: '4px', height: '100%'}}>
+                        <div className='column is-full'>
+                        Wins: {opponent.wins}
+                        </div>
+                        <div className='column is-full'>
+                            Deaths: {opponent.deaths}
+                        </div>
+                        <div className='column is-full'>
+                        <Button className='buy' style={{ backgroundColor: '#e6cc80', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '25px', textShadow: '2px 2px 10px #ffffff' }} >+{(opponent.rating*10) +25}💎</Button>
+                        </div>
+                    </div>
+                  </ListGroup.Item>
+                </div>
+                
+              </div>
+              <div className='column is-full'>
+                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', marginRight: '-7px', marginLeft: '5px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}>⚔️FIGHT</Button>
+              </div>
+            </div>
                     
                 ))}
+                </ListGroup>
                 </div>
                 )
             }
@@ -133,7 +148,7 @@ function Fight() {
     
     
     // Having trouble accessing the amount of gold the character has 
-    
+                                
     // import { useState } from 'react';
     // const [inventory, setInventory] = useState([]);
     

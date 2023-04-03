@@ -217,7 +217,7 @@ function Battle() {
             if (!player1.isAlive()) {
                 gain = (player2.rating * 10) + 25;
                 console.log('this should be sworksgfogjnfgoni')
-                battleState.combatLog.push({ "action": `-${gain}💎`, "bulma": "button is-danger has-text-centered is-large is-fullwidth title" });
+                battleState.combatLog.push({ "action": `-${Math.floor(gain/7)}💎`, "bulma": "button is-danger has-text-centered is-large is-fullwidth title" });
             }
             const { data: charLoss } = await charUpdate({
                 variables: { name: loser.name, win: false, gain: gain },

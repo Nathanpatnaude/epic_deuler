@@ -153,20 +153,28 @@ const Inventory = () => {
   return (
     <div className=" is-size-5">
       <div className="has-text-centered ">
-        Equipment
+      <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}>🏰</h1>
       </div>
-      <div className="is-flex is-justify-content-center is-align-content-center is-flex-wrap-wrap container columns is-gapless" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundColor: '#ffffff', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px', padding: '0px' }} >
+      <div className="is-flex is-justify-content-center is-align-content-center is-flex-wrap-wrap container columns is-gapless pt-3 pb-3" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundColor: '#ffffff', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px' }} >
+      <div className="m-2 dropdown" style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '296px'}}>
+          {data ? (
+            <UserCharacter data={data} />
+          ) : (
+            <div>
+            </div>
+          )}
+        </div>
         {Object.keys(inventory).map((key, index) => {
           if (index > 0 && index < 7) {
             return (
-              <div className={`dropdown p-2 m-2 is-block has-text-centered ${activeDropdown === key ? 'is-active' : ''} `} key={key} style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '140px'}} onClick={() => handleDropdownClick(key)} onBlur={() => handleDropdownClick()}>
+              <button className={`button dropdown p-2 m-2 is-block has-text-centered ${activeDropdown === key ? 'is-active' : ''} `} key={key} style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '140px', height: '100%'}} onClick={() => handleDropdownClick(key)} onBlur={() => handleDropdownClick()}>
                 <div className="has-text-centered">{key.charAt(0).toUpperCase() + key.slice(1)}</div>
-                <span className='button mb-2' style={{ whiteSpace: 'normal', height: '3rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>{callKey(key, 'name')}</span>
+                <span className='button mb-2 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '3rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '100%' }}>{callKey(key, 'name')}</span>
                 <div className=" dropdown-trigger ">
                   
-                  <button className="button equip is-outlined is-size-3 pl-4 pr-4 pb-1 pt-2" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', borderRadius: '40px', borderBottom: '16px', borderBottomStyle: 'solid' }} >
+                <div className="bauble equip is-size-3 pl-4 pr-4 pb-1 pt-3">
                     <span>{callKey(key, 'icon')}</span>
-                  </button>
+                  </div>
                   
                 </div>
                 <div className="dropdown-menu" id="dropdown-menu" role="menu">
@@ -194,34 +202,21 @@ const Inventory = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </button>
             );
           }
           return null;
         })}
       </div>
-      <div className="columns m-1">
-
-        <div className="column is-two-fifths">
-          {data ? (
-            <UserCharacter data={data} />
-          ) : (
-            <div>
-            </div>
-          )}
-        </div>
-
-        <div className="column is-three-fifths">
-          {data ? (
+    
+      <div className="column is-full p-0">
+            {data ? (
             <InventoryList data={data} />
           ) : (
             <div>
             </div>
           )}
-
-        </div>
-
-      </div>
+</div>
     </div>
   );
 }

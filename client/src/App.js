@@ -46,7 +46,7 @@ function App() {
         <Router>
         <div className="flex-column justify-flex-start min-100-vh">
             <Header />
-            <div className="container" style={{padding:"15px"}}>
+            <div className="container" style={{padding:"15px", maxWidth: '1385px' }}>
               <Routes>
                 <Route 
                   path="/" 
