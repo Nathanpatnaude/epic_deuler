@@ -194,7 +194,7 @@ function Shop() {
               <div className='columns column p-0 m-0 is-full is-mobile' style={{ height: '240px'}}>
                 <div className=' pl-1 py-4' style={{ width: '148px' }}>               
                  <span className='button mb-2 is-size-5 p-1 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '4rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '95%', fontWeight: 'bold' }}>{item.name}</span>
-                  <div className="mt-4 mb-2">
+                  <div className="mt-2 mb-0">
                   
                     <div className="bauble equip is-size-3 pl-4 pr-4 pb-1 pt-3">
                       <span>{item.icon}</span>

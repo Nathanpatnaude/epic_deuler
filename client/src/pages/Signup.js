@@ -157,8 +157,8 @@ const Signup = () => {
                   </div>
                 </div>
               </form>
-            )}{charError && (
-              <div className="notification is-danger">{charError.message}</div>
+            )}{profileError && (
+              <div className="notification is-danger">{profileError.message}</div>
             )}
             
             

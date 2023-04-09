@@ -103,6 +103,9 @@ const Login = (props) => {
                     Create A New Character
                   </Link>
                 </div>
+                {error && (
+              <div className="notification is-danger">{error.message}</div>
+            )}
               </div>
             </form>
           </div>

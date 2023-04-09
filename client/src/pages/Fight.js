@@ -130,7 +130,7 @@ function Fight() {
                 
               </div>
               <div className='column is-full'>
-                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}><span className='span-outline'>⚔️</span>FIGHT</Button>
+                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-14px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}><span className='span-outline'>⚔️</span>FIGHT</Button>
               </div>
             </div>
                     

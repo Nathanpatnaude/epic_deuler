@@ -48,9 +48,14 @@ function Battle() {
 
     var token = Auth.getToken();
     if (!token || Auth.isTokenExpired(token)) {
-      window.location.assign('/');
+        window.location.assign('/');
     }
-    const getPlayerIcon = (icon, slot) => {
+    const getPlayerIcon = (icon, slot, player) => {
+        if (!player.isAlive() && slot === 'armor') {
+            return '🪦'
+        } else if (!player.isAlive() && slot === 'weapon') {
+            return '☠️'
+        }
         if (icon === '🚫' && slot === 'weapon') {
             return '👊';
         } else if (icon === '🚫' && slot === 'armor') {
@@ -69,7 +74,7 @@ function Battle() {
         battleLoad++;
         playerHp = player1.hitpoints;
         opponentHp = player2.hitpoints;
-    
+
     } else if (data && data2) {
         if (player1.hitpoints > 0 && player2.hitpoints > 0) {
             playerHp = player1.hitpoints;
@@ -87,7 +92,7 @@ function Battle() {
     } else {
         console.log(JSON.parse(JSON.stringify(error)))
     }
-    
+
     const startRound = (action) => {
         var attackRound;
         if (playerTurn) {
@@ -217,7 +222,7 @@ function Battle() {
             if (!player1.isAlive()) {
                 gain = (player2.rating * 10) + 25;
                 console.log('this should be sworksgfogjnfgoni')
-                battleState.combatLog.push({ "action": `-${Math.floor(gain/7)}💎`, "bulma": "button is-danger has-text-centered is-large is-fullwidth title" });
+                battleState.combatLog.push({ "action": `-${Math.floor(gain / 7)}💎`, "bulma": "button is-danger has-text-centered is-large is-fullwidth title" });
             }
             const { data: charLoss } = await charUpdate({
                 variables: { name: loser.name, win: false, gain: gain },
@@ -235,13 +240,7 @@ function Battle() {
     }
 
     function rollDice() {
-        if (playerTurn) {
-            battleState.playerTurns++
-            battleState.combatLog.push({ "action": ` ${player1.name} attacks!`, "bulma": `${attackLogCss} fromleft` });
-        } else {
-            battleState.combatLog.push({ "action": `${player2.name} attacks!`, "bulma": `${attackLogCss} fromright` });
-            battleState.opponentTurns++
-        }
+
         hit = Math.floor(Math.random() * 20) + 1;
         defense = (Math.floor(Math.random() * 20) + 1);
         if (playerTurn) {
@@ -257,7 +256,13 @@ function Battle() {
             battleState.playerRoll = defense;
             battleState.opponentRoll = hit;
         };
-
+        if (playerTurn) {
+            battleState.playerTurns++
+            battleState.combatLog.push({ "action": ` ${player1.name} attacks!`, "bulma": `${attackLogCss} fromleft` });
+        } else {
+            battleState.combatLog.push({ "action": `${player2.name} attacks!`, "bulma": `${attackLogCss} fromright` });
+            battleState.opponentTurns++
+        }
     };
 
     function rollInit() {
@@ -287,7 +292,7 @@ function Battle() {
             <Container>
                 <div className="tile is-ancestor">
                     <div className="tile is-vertical is-12">
-                        <div className="columns is-mobile mt-2 box p-0" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundImage: 'url("landscape-scene.jpg")', backgroundSize: 'cover',  borderRadius: '40px' }}>
+                        <div className="columns is-mobile mt-2 box p-0" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundImage: 'url("landscape-scene.jpg")', backgroundSize: 'cover', borderRadius: '40px' }}>
                             <div className="tile is-parent pr-1">
                                 <div className="tile is-child p-0">
 
@@ -298,13 +303,13 @@ function Battle() {
                                     <div className="is-mobile columns mt-2 ml-0">
                                         <div key={battleState.playerTurns} className="column p-0 ">
                                             <p className="is-size-3 is-size-6-mobile battle-name pop-crit">
-                                            {data.me.name.charAt(0).toUpperCase() + data.me.name.slice(1)}</p>
-                                            <p className="is-size-2 is-size-4-mobile column playerAttack" style={{textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 20px #ffffff',}}>
-                                                {getPlayerIcon(data.me.inventory.armor.icon, 'armor')}
-                                                {getPlayerIcon(data.me.inventory.weapon.icon, 'weapon')}                       
+                                                {data.me.name.charAt(0).toUpperCase() + data.me.name.slice(1)}</p>
+                                            <p className="is-size-2 is-size-4-mobile column playerAttack" style={{ textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 20px #ffffff', }}>
+                                                {getPlayerIcon(data.me.inventory.armor.icon, 'armor', player1)}
+                                                {getPlayerIcon(data.me.inventory.weapon.icon, 'weapon', player1)}
                                             </p>
                                         </div>
-                                        <div className="p-1 has-text-right button pop-crit mr-3 is-size-7-mobile " style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px'}}>
+                                        <div className="p-1 has-text-right button pop-crit mr-3 is-size-7-mobile " style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
                                             ({battleState.playerRoll})<span className="span-outline"> 🎲{battleState.playerRollIcon}</span>
                                         </div>
 
@@ -316,22 +321,22 @@ function Battle() {
                                     <div className="is-flex health-display button p-1" style={{ border: '3px solid rgba(1, 1, 1, 1)', borderRadius: '40px', marginRight: '-12px' }}>
                                         <Badge key={opponentHp} className='is-size-4 is-size-6-mobile column p-0 pop-hp'>{opponentHp}</Badge>
                                         <span className="span-outline">
-                                        ❤️</span>
+                                            ❤️</span>
                                         <progress className="progress is-danger is-large" id="health" value={opponentHp} max={data2.opponent.statblock.hp}></progress>
 
                                     </div>
                                     <div className="is-mobile columns mt-2 mr-0">
-                                        <div className="p-1 has-text-left ml-3 is-size-7-mobile button" style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px'}}>
-                                        <span className="span-outline">
-                                            {battleState.opponentRollIcon}🎲
+                                        <div className="p-1 has-text-left ml-3 is-size-7-mobile button" style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
+                                            <span className="span-outline">
+                                                {battleState.opponentRollIcon}🎲
                                             </span>
                                             ({battleState.opponentRoll})
                                         </div>
                                         <div key={battleState.opponentTurns} className="column p-0  has-text-right">
                                             <p className="is-size-3 is-size-6-mobile battle-name pop-crit">
-                                            {data2.opponent.name.charAt(0).toUpperCase() + data2.opponent.name.slice(1)}</p>
-                                            <p className="is-size-2 is-size-4-mobile column opponentAttack" style={{textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 20px #ffffff',}}>
-                                                {getPlayerIcon(data2.opponent.inventory.weapon.icon, 'weapon')}{getPlayerIcon(data2.opponent.inventory.armor.icon, 'armor')}                                                
+                                                {data2.opponent.name.charAt(0).toUpperCase() + data2.opponent.name.slice(1)}</p>
+                                            <p className="is-size-2 is-size-4-mobile column opponentAttack" style={{ textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 20px #ffffff', }}>
+                                                {getPlayerIcon(data2.opponent.inventory.weapon.icon, 'weapon', player2)}{getPlayerIcon(data2.opponent.inventory.armor.icon, 'armor', player2)}
                                             </p>
                                         </div>
 
@@ -354,7 +359,7 @@ function Battle() {
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </Container>
         </>
     );
