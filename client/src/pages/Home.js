@@ -7,7 +7,7 @@ const Home = () => {
         <div className="columns is-centered">
           <div className="column is-6">
             <div className="box has-text-centered" style={{ backgroundColor: '#ffffff' }}>
-              <h1 className="title has-text-centered is-size-2 mb-4 equip" 
+              <h1 className="fromtop title has-text-centered is-size-2 mb-4 equip" 
               style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}>
                 <span className='span-outline'>⚔️</span></h1>
               <h2 className="title has-text-centered">Welcome to Epic Dueler</h2>

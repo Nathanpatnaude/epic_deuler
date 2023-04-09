@@ -11,19 +11,19 @@ const Nav = () => {
           <ul>
             <li className=""> 
              
-          <Link to="/inventory" className="button navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
-          <span className='span-outline'>🏰</span>Home
+          <Link to="/inventory" className="px-3 button navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
+          <span className='span-outline'>🏰</span><span className=''>Home</span>
           </Link>
 
           </li>
           <li>
-          <Link to="/fight" className=" navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
-          <span className='span-outline'>⚔️</span>Fight
+          <Link to="/fight" className="px-1 navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
+          <span className='span-outline'>⚔️</span><span className=''>Fight</span>
           </Link>
           </li>
           <li>
-          <Link to="/shop" className="navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
-          <span className='span-outline'>💰</span>Shop
+          <Link to="/shop" className="px-3 navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
+          <span className='span-outline'>💰</span><span className=''>Shop</span>
           </Link>
           </li>
           </ul>

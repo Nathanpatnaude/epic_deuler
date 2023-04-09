@@ -29,6 +29,7 @@ function Battle() {
         opponentRoll: 0,
         playerTurns: 0,
         opponentTurns: 0,
+        initRolls: 0,
         playerRollIcon: '🌀',
         opponentRollIcon: '🌀',
         actionDes: 'START BATTLE',
@@ -284,6 +285,7 @@ function Battle() {
             battleState.combatLog.push({ "action": `(${opponentInit}) 🎲🌀 INITIATIVE  🌀🎲 (${playerInit})`, "bulma": rollLogCss });
 
         }
+        battleState.initRolls++;
         nextAction = 'initResult';
     }
 
@@ -309,8 +311,8 @@ function Battle() {
                                                 {getPlayerIcon(data.me.inventory.weapon.icon, 'weapon', player1)}
                                             </p>
                                         </div>
-                                        <div className="p-1 has-text-right button pop-crit mr-3 is-size-7-mobile " style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
-                                            ({battleState.playerRoll})<span className="span-outline"> 🎲{battleState.playerRollIcon}</span>
+                                        <div className="p-1 has-text-right button mr-3 is-size-7-mobile" key={battleState.playerTurns + battleState.opponentTurns + battleState.initRolls} style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
+                                            ({battleState.playerRoll})<span className="span-outline fromtop"> 🎲{battleState.playerRollIcon}</span>
                                         </div>
 
                                     </div>
@@ -326,8 +328,8 @@ function Battle() {
 
                                     </div>
                                     <div className="is-mobile columns mt-2 mr-0">
-                                        <div className="p-1 has-text-left ml-3 is-size-7-mobile button" style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
-                                            <span className="span-outline">
+                                        <div className="p-1 has-text-left ml-3 is-size-7-mobile button" key={battleState.playerTurns + battleState.opponentTurns + battleState.initRolls + 1}style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
+                                            <span className="span-outline fromtop">
                                                 {battleState.opponentRollIcon}🎲
                                             </span>
                                             ({battleState.opponentRoll})
@@ -352,7 +354,7 @@ function Battle() {
                         </div>
                         <div className="tile is-parent" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
                             <div id="messageBody" className="panel-Body box scroll is-size-4 is-size-6-mobile is-flex">
-                                <div className="button is-warning has-text-centered is-large is-fullwidth title" style={{ backgroundColor: '#0070dd', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px' }} onClick={() => (startFight())}>
+                                <div className=" buy button is-warning has-text-centered is-large is-fullwidth title" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #ffffff, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black', borderRadius: '40px', height: '80px' }} onClick={() => (startFight())}>
                                     <p className="title">{battleState.actionDes}</p>
                                 </div>
                                 {battleState.combatLog.map((element) => (<div className={element.bulma} onClick={() => (startFight())}>{element.action}</div>))}

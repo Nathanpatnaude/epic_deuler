@@ -153,9 +153,9 @@ const Inventory = () => {
   return (
     <div className=" is-size-5">
       <div className="has-text-centered ">
-      <h1 className="title has-text-centered is-size-2 mb-4 equip " style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}>🏰</h1>
+      <h1 className="fromtop title has-text-centered is-size-2 mb-4 equip " style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}>🏰</h1>
       </div>
-      <div className="is-flex is-justify-content-center is-align-content-center is-flex-wrap-wrap container columns is-gapless pt-3 pb-3" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundColor: '#ffffff', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px' }} >
+      <div className="is-flex is-justify-content-center is-align-content-center is-flex-wrap-wrap columns is-gapless pt-3 pb-3" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundColor: '#ffffff', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px' }} >
       <div className="m-2 dropdown" style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '296px'}}>
           {data ? (
             <UserCharacter data={data} />
@@ -167,12 +167,12 @@ const Inventory = () => {
         {Object.keys(inventory).map((key, index) => {
           if (index > 0 && index < 7) {
             return (
-              <button className={`button dropdown p-2 m-2 is-block has-text-centered ${activeDropdown === key ? 'is-active' : ''} `} key={key} style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '140px', height: '100%'}} onClick={() => handleDropdownClick(key)} onBlur={() => handleDropdownClick()}>
+              <button className={`button dropdown p-2 m-2 is-block has-text-centered ${activeDropdown === key ? 'is-active' : ''} `} key={callKey(key)} style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '140px', height: '100%'}} onClick={() => handleDropdownClick(key)} onBlur={() => handleDropdownClick()}>
                 <div className="has-text-centered">{key.charAt(0).toUpperCase() + key.slice(1)}</div>
                 <span className='button mb-2 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '3rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '100%' }}>{callKey(key, 'name')}</span>
                 <div className=" dropdown-trigger ">
                   
-                <div className="bauble equip is-size-3 pl-4 pr-4 pb-1 pt-3">
+                <div className="fromtop bauble equip is-size-3 pl-4 pr-4 pb-1 pt-3">
                     <span>{callKey(key, 'icon')}</span>
                   </div>
                   
