@@ -67,11 +67,11 @@ function Fight() {
 
     const opponentStyle = (rating, ratingMe) => {
         if (rating < (ratingMe - 3)) {
-           return {backgroundColor: `#9d9d9d`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '317px'};
+           return {backgroundColor: `#9d9d9d`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '322px'};
         } else if (rating > (ratingMe + 3)) {
-            return {backgroundColor: `#a335ee`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '317px'};
+            return {backgroundColor: `#a335ee`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '322px'};
         } else {
-            return {backgroundColor: `#0070dd`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '317px'};
+            return {backgroundColor: `#0070dd`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '322px'};
         }
     }
     const handleFight = async (opponent) => {
@@ -98,7 +98,7 @@ function Fight() {
                            
                    <div className={`dropdown pr-0 m-1 has-text-centered is-block`} key={opponent._id} style={opponentStyle(opponent.rating, dataMe.me.rating)}>
               <div className='columns column p-0 m-0 is-full is-mobile' style={{ height: '250px'}}>
-                <div className=' pl-1 py-4' style={{ width: '148px' }}>               
+                <div className=' pl-1 py-1' style={{ width: '148px' }}>               
                  <span className='button mb-2 is-size-5 p-1 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '4rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '316px', fontWeight: 'bold' }}>{opponent.name}</span>
                   <div className="mt-1 mb-2">
                   
@@ -130,7 +130,7 @@ function Fight() {
                 
               </div>
               <div className='column is-full'>
-                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', marginRight: '-7px', marginLeft: '5px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}><span className='span-outline'>⚔️</span>FIGHT</Button>
+                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}><span className='span-outline'>⚔️</span>FIGHT</Button>
               </div>
             </div>
                     
