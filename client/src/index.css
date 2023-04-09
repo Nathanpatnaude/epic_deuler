@@ -4,10 +4,10 @@
     width: 90%; 
     margin: auto;
     display: flex;
-    justify-content: flex-end;
     flex-direction: column-reverse;
     overscroll-behavior-y: contain;
     scroll-snap-type: y mandatory;
+
 }
 
 .scroll > div:last-child {
@@ -21,9 +21,13 @@
   border-color: grey;
 }
 
+.span-outline {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
 .bauble {
   background-color: #e6cc80;
-  text-shadow: 2px 2px 10px #a335ee;
+  text-shadow: 2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   border-radius: 40px;
   border-width: 0px 1px 16px 1px;
   border-style: solid;
@@ -92,147 +96,65 @@
   animation: .3s anim-playerAttack linear;
 }
 @keyframes anim-playerAttack {
-  0% { opacity: 1; transform: translateX(0%);}
-  25% { opacity: 1; transform: translateX(250%);}
-  50% { opacity: .5; transform: translateX(50%);
+  0% { opacity: 1; transform: translateX(0%) scaleY(1.5);}
+  25% { opacity: 1; transform: translateX(200%) scaleY(2) scaleX(2); filter: drop-shadow(8px 8px 10px red);}
+  50% { opacity: 1; transform: translateX(100%) scaleY(2) scaleX(1); filter: drop-shadow(8px 8px 10px red);
   }
-  100% {
+  100% { opacity: 1; transform: translateX( 0%) ScaleY(0);
   }
 }
 
 .opponentAttack {
-  animation: .3s anim-opponentAttack linear;
+  animation: .4s anim-opponentAttack linear;
 }
 @keyframes anim-opponentAttack {
-  0% { opacity: 1; transform: translateX(0%);}
-  25% { opacity: 1; transform: translateX(-250%);}
-  50% { opacity: .5; transform: translateX(50%);
+  0% { opacity: 1; transform: translateX(0%) scaleY(1.5);}
+  25% { opacity: 1; transform: translateX(-200%) scaleY(2) scaleX(2); filter: drop-shadow(8px 8px 10px red);}
+  50% { opacity: 1; transform: translateX(-200%) scaleY(2) scaleX(1); filter: drop-shadow(8px 8px 10px red);
   }
-  100% {
+  100% { opacity: 1; transform: translateX( 0%) scaleY(1);
   }
 }
-.pop-outin {
-    animation: .5s anim-popoutin ease;
-  }
-  
-  @keyframes anim-popoutin {
-    0% {
-      color: black;
-      transform: scaleY(12);
-      opacity: 1;
-      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    }
-    25% {
-      color: red;
-      transform: scaleY(7);
-      opacity: 1;
-      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-      color: red;
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
-    100% {
-      /* animate nothing to add pause at the end of animation */
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
-  }
+
+.pop-outin{animation:slide-in-blurred-top .3s cubic-bezier(.23,1.000,.32,1.000) both}
+
+ @keyframes slide-in-blurred-top{
+  0%{color: red; transform:translateY(-1000px) scaleY(2.5) scaleX(.2);transform-origin:50% 0;filter:blur(40px);opacity:0}
+  50%{color: red; transform:translateY(-200px) scaleY(2) scaleX(1);transform-origin:50% 25%;filter:blur(0);opacity:1}
+  100%{color: black; transform:translateY(0) scaleY(1) scaleX(1);transform-origin:50% 50%;filter:blur(0);opacity:1}}
+
+
 
   .pop-outin-bash {
-    animation: .5s anim-pop-outin-bash ease;
+    animation: anim-pop-outin-bash .3s cubic-bezier(.23,1.000,.32,1.000) both;
   }
   
   @keyframes anim-pop-outin-bash {
-    0% {
-      color: black;
-      transform: scaleY(12);
-      opacity: 1;
-      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    }
-    25% {
-      color: rgb(0, 225, 255);
-      transform: scaleY(7);
-      opacity: 1;
-      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-      color: rgb(0, 225, 255);
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
-    100% {
-      /* animate nothing to add pause at the end of animation */
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
+    0%{color: rgb(0, 225, 255); transform:translateY(-1000px) scaleY(2.5) scaleX(.2);transform-origin:50% 0;filter:blur(40px);opacity:0}
+    50%{color: rgb(0, 225, 255); transform:translateY(-200px) scaleY(2) scaleX(1);transform-origin:50% 25%;filter:blur(0);opacity:1}
+    100%{color: black; transform:translateY(0) scaleY(1) scaleX(1);transform-origin:50% 50%;filter:blur(0);opacity:1}
   }
 
   .pop-outin-glance {
-    animation: .5s anim-pop-outin-glance ease;
+    animation: anim-pop-outin-glance .3s cubic-bezier(.23,1.000,.32,1.000) both;
   }
   
   @keyframes anim-pop-outin-glance {
-    0% {
-      color: black;
-      transform: scaleY(12);
-      opacity: 1;
-      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    }
-    25% {
-      color: rgb(255, 255, 0);
-      transform: scaleY(7);
-      opacity: 1;
-      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-      color: rgb(255, 255, 0);
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
-    100% {
-      /* animate nothing to add pause at the end of animation */
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
+    0%{color: rgb(255, 255, 0); transform:translateY(-1000px) scaleY(2.5) scaleX(.2);transform-origin:50% 0;filter:blur(40px);opacity:0}
+    50%{color: rgb(255, 255, 0); transform:translateY(-200px) scaleY(2) scaleX(1);transform-origin:50% 25%;filter:blur(0);opacity:1}
+    100%{color: black; transform:translateY(0) scaleY(1) scaleX(1);transform-origin:50% 50%;filter:blur(0);opacity:1}
+    
   }
 
   .pop-outin-block {
-    animation: .5s anim-pop-outin-block ease;
+    animation: anim-pop-outin-block .3s cubic-bezier(.23,1.000,.32,1.000) both;
   }
   
   @keyframes anim-pop-outin-block {
-    0% {
-      color: black;
-      transform: scaleY(12);
-      opacity: 1;
-      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    }
-    25% {
-      color: rgb(143, 243, 243);
-      transform: scaleY(7);
-      opacity: 1;
-      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
-    }
-    50% {
-      color: rgb(0, 225, 255);
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
-    100% {
-      /* animate nothing to add pause at the end of animation */
-      transform: scale(1);
-      opacity: 1;
-      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
-    }
+    0%{color: rgb(0, 225, 255); transform:translateY(-1000px) scaleY(2.5) scaleX(.2);transform-origin:50% 0;filter:blur(40px);opacity:0}
+    50%{color: rgb(0, 225, 255); transform:translateY(-200px) scaleY(2) scaleX(1);transform-origin:50% 25%;filter:blur(0);opacity:1}
+    100%{color: black; transform:translateY(0) scaleY(1) scaleX(1);transform-origin:50% 50%;filter:blur(0);opacity:1}
+
   }
 
   .pop-crit {
@@ -264,6 +186,11 @@
       opacity: 1;
 
     }
+  }
+
+  .battle-name {
+    color:#ffffff;
+    text-shadow: 0px 0px 5px black, 2px 2px 4px #000000, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   }
 
   .pop-hp {

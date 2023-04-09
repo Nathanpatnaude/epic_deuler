@@ -134,51 +134,51 @@ function Shop() {
       const ifAfforadable = (item) => {
         if (!dataMe.me.inventory.bag.some(owned => owned._id === item._id)) {
         if (item.price > dataMe.me.gold) {
-          return (<Button className='' style={{ backgroundColor: 'grey', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}💎</Button>)
+          return (<Button className='' style={{ backgroundColor: 'grey', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >{item.price}<span className='span-outline'>💎</span></Button>)
         } else {
-          return (<Button className='shop-button buy' onClick={() => handlePurchase(item._id, 'buy')} style={{ backgroundColor: '#0070dd'}} >{item.price}💎</Button>)
+          return (<Button className='shop-button buy' onClick={() => handlePurchase(item._id, 'buy')} style={{ backgroundColor: '#0070dd'}} >{item.price}<span className='span-outline'>💎</span></Button>)
         }
       } else if (shopState.tabSell != 'is-active') {
         return (<Button className='shop-button' style={{ backgroundColor: 'grey'}} >SOLD</Button>)
       } else {
-        return (<Button className='shop-button sell' onClick={() => handlePurchase(item._id, 'sell')} style={{ backgroundColor: '#e6cc80' }} >+{Math.floor(item.price/2)}💎</Button>)
+        return (<Button className='shop-button sell' onClick={() => handlePurchase(item._id, 'sell')} style={{ backgroundColor: '#e6cc80' }} >{Math.floor(item.price/2)}<span className='span-outline'>💎</span></Button>)
       }
 
       }
     return (
         <>
         <div className="has-text-centered ">
-      <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}>🧙‍♂️</h1>
+      <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid' }}><span className='span-outline'>🧙‍♂️</span></h1>
       </div>
           <div className="is-centered tabs is-boxed is-large" >
   <ul >
     <li className={shopState.tabAll} onClick={() => {handleTabs('all')}} >
       <a href={() => false}>
-        <span >📜</span>
+        <span className="span-outline">📜</span>
         <span className="username">All</span>
       </a>
     </li>
     <li className={shopState.tabWeapons} onClick={() => {handleTabs('weapon')}}>
       <a href={() => false}>
-        <span >🖐️</span>
+        <span className="span-outline">🖐️</span>
         <span className="username">Weapons</span>
       </a>
     </li>
     <li className={shopState.tabArmor} onClick={() => {handleTabs('armor')}}>
       <a href={() => false}>
-        <span >👤</span>
+        <span className="span-outline">👤</span>
         <span className="username">Armor</span>
       </a >
     </li>
     <li className={shopState.tabTrinket} onClick={() => {handleTabs('trinket')}}>
       <a href={() => false}>
-        <span >⚙️</span>
+        <span className="span-outline">⚙️</span>
         <span className="username">Trinkets</span>
       </a>
     </li>
     <li className={shopState.tabSell} onClick={() => {handleTabs('sell')}}>
       <a href={() => false}>
-        <span >💰</span>
+        <span className="span-outline">💰</span>
         <span className="username">Sell</span>
       </a>
     </li>

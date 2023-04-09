@@ -12,18 +12,18 @@ const Nav = () => {
             <li className=""> 
              
           <Link to="/inventory" className="button navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
-          🏰Home
+          <span className='span-outline'>🏰</span>Home
           </Link>
 
           </li>
           <li>
           <Link to="/fight" className=" navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
-          ⚔️Fight
+          <span className='span-outline'>⚔️</span>Fight
           </Link>
           </li>
           <li>
           <Link to="/shop" className="navbar-item is-size-3 is-size-6-mobile has-background-#ffbc6b">
-          💰Shop
+          <span className='span-outline'>💰</span>Shop
           </Link>
           </li>
           </ul>

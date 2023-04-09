@@ -51,7 +51,7 @@ const InventoryList = ({ data }) => {
   return (
     <>
     <div className="has-text-centered ">
-    <h1 className="title has-text-centered is-size-2 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', marginBottom:'-50px', borderBottom: '16px', borderBottomStyle: 'solid' }}>💼</h1>
+    <h1 className="title has-text-centered is-size-2 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', marginBottom:'-50px', borderBottom: '16px', borderBottomStyle: 'solid' }}><span className='span-outline'>💼</span></h1>
       </div>
       
       {loading ? (
@@ -61,10 +61,10 @@ const InventoryList = ({ data }) => {
         <ListGroup key='bag' className="is-flex section is-flex-wrap-wrap field label box has-text-centered pl-0 pr-0" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px', padding: '30px'}}>
           {itemData.map((item) => (
           <div className={`dropdown pr-0 m-1 is-block has-text-centered columns is-mobile is-flex`} key={item._id} style={{ backgroundColor: `${ifNotEquipped(item._id)}`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '230px'}}>
-            <div className=' pl-1 py-4' style={{ width: '148px' }}>
+            <div className=' pl-1 py-1' style={{ width: '148px' }}>
                 
                 
-                <div className="mt-2 mb-4">
+                <div className="mt-2 mb-2">
                   
                 <div className="bauble equip is-size-3 pl-4 pr-4 pb-1 pt-3">
                     <span>{item.icon}</span>

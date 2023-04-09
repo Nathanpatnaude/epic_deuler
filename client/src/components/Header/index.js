@@ -64,13 +64,15 @@ function Header() {
                 <div >
                   <Badge className='is-pulled-left is-size-6-mobile' style={{ display: 'inline-block', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.2em 0.6em', margin: '0px' }}>{rating}</Badge>
                 </div>
+                <span className='span-outline'>
                 {getPlayerIcon(data.me.inventory.armor.icon, 'armor')}
                 {getPlayerIcon(data.me.inventory.weapon.icon, 'weapon')}
+                </span>
                 <span className='username'>
                   {username}
                 </span>
 
-                <Button className='is-size-6-mobile is-size-4' style={{ backgroundColor: '#0070dd', textShadow:'2px 2px 10px #ffffff', borderRadius: '40px', alignItems: 'center', width: 'fit-content', display: 'initial', }} >{gold}💎</Button>
+                <Button className='is-size-6-mobile is-size-4' style={{ backgroundColor: '#0070dd', textShadow:'2px 2px 10px #ffffff', borderRadius: '40px', alignItems: 'center', width: 'fit-content', display: 'initial', }} >{gold}<span className='span-outline'>💎</span></Button>
               </div>
             </div>
           </div>

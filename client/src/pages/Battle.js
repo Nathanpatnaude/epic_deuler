@@ -287,25 +287,25 @@ function Battle() {
             <Container>
                 <div className="tile is-ancestor">
                     <div className="tile is-vertical is-12">
-                        <div className="columns is-mobile mt-2 box p-0" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundColor: '#e6cc80',  borderRadius: '40px' }}>
+                        <div className="columns is-mobile mt-2 box p-0" style={{ border: '4px solid rgba(1, 1, 1, 1)', backgroundImage: 'url("landscape-scene.jpg")', backgroundSize: 'cover',  borderRadius: '40px' }}>
                             <div className="tile is-parent pr-1">
                                 <div className="tile is-child p-0">
 
                                     <div className="is-flex health-display has-text-right button mb-0 p-1" style={{ border: '3px solid rgba(1, 1, 1, 1)', borderRadius: '40px', marginLeft: '-10px' }}>
-                                        <progress className="progress is-danger is-large mb-0" id="health" value={playerHp} max={data.me.statblock.hp}></progress>❤️
+                                        <progress className="progress is-danger is-large mb-0" id="health" value={playerHp} max={data.me.statblock.hp}></progress><span className="span-outline">❤️</span>
                                         <Badge key={playerHp} className='is-size-6-mobile is-size-4 column p-0 pop-hp'>{playerHp}</Badge>
                                     </div>
                                     <div className="is-mobile columns mt-2 ml-0">
-                                        <div key={battleState.playerTurns} className="column p-0 playerAttack">
-                                            <p className="is-size-3 is-size-6-mobile">
+                                        <div key={battleState.playerTurns} className="column p-0 ">
+                                            <p className="is-size-3 is-size-6-mobile battle-name pop-crit">
                                             {data.me.name.charAt(0).toUpperCase() + data.me.name.slice(1)}</p>
-                                            <p className="is-size-2 is-size-4-mobile column" style={{textShadow: '2px 2px 10px #a335ee',}}>
+                                            <p className="is-size-2 is-size-4-mobile column playerAttack" style={{textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 20px #ffffff',}}>
                                                 {getPlayerIcon(data.me.inventory.armor.icon, 'armor')}
                                                 {getPlayerIcon(data.me.inventory.weapon.icon, 'weapon')}                       
                                             </p>
                                         </div>
-                                        <div className="p-1 has-text-right button pop-crit mr-3 is-size-7-mobile" style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px'}}>
-                                            ({battleState.playerRoll})🎲{battleState.playerRollIcon}
+                                        <div className="p-1 has-text-right button pop-crit mr-3 is-size-7-mobile " style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px'}}>
+                                            ({battleState.playerRoll})<span className="span-outline"> 🎲{battleState.playerRollIcon}</span>
                                         </div>
 
                                     </div>
@@ -315,20 +315,22 @@ function Battle() {
                                 <div className="has-text-right tile is-child p-0">
                                     <div className="is-flex health-display button p-1" style={{ border: '3px solid rgba(1, 1, 1, 1)', borderRadius: '40px', marginRight: '-12px' }}>
                                         <Badge key={opponentHp} className='is-size-4 is-size-6-mobile column p-0 pop-hp'>{opponentHp}</Badge>
-                                        ❤️
+                                        <span className="span-outline">
+                                        ❤️</span>
                                         <progress className="progress is-danger is-large" id="health" value={opponentHp} max={data2.opponent.statblock.hp}></progress>
 
                                     </div>
                                     <div className="is-mobile columns mt-2 mr-0">
                                         <div className="p-1 has-text-left ml-3 is-size-7-mobile button" style={{ border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px'}}>
-
+                                        <span className="span-outline">
                                             {battleState.opponentRollIcon}🎲
+                                            </span>
                                             ({battleState.opponentRoll})
                                         </div>
-                                        <div key={battleState.opponentTurns} className="column p-0 opponentAttack has-text-right">
-                                            <p className="is-size-3 is-size-6-mobile">
+                                        <div key={battleState.opponentTurns} className="column p-0  has-text-right">
+                                            <p className="is-size-3 is-size-6-mobile battle-name pop-crit">
                                             {data2.opponent.name.charAt(0).toUpperCase() + data2.opponent.name.slice(1)}</p>
-                                            <p className="is-size-2 is-size-4-mobile column " style={{textShadow: '2px 2px 10px #a335ee',}}>
+                                            <p className="is-size-2 is-size-4-mobile column opponentAttack" style={{textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 0px 0px 20px #ffffff',}}>
                                                 {getPlayerIcon(data2.opponent.inventory.weapon.icon, 'weapon')}{getPlayerIcon(data2.opponent.inventory.armor.icon, 'armor')}                                                
                                             </p>
                                         </div>
@@ -344,7 +346,7 @@ function Battle() {
                             </div>
                         </div>
                         <div className="tile is-parent" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
-                            <div id="messageBody" className="panel-Body box scroll is-size-4 is-size-6-mobile">
+                            <div id="messageBody" className="panel-Body box scroll is-size-4 is-size-6-mobile is-flex">
                                 <div className="button is-warning has-text-centered is-large is-fullwidth title" style={{ backgroundColor: '#0070dd', textShadow: '2px 2px 10px #ffffff', borderRadius: '40px' }} onClick={() => (startFight())}>
                                     <p className="title">{battleState.actionDes}</p>
                                 </div>

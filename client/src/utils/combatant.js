@@ -40,7 +40,7 @@ class Combatant {
     var logArray = [];
     var nextAction = '';
 
-    if (hit > defense + target.parry || (hit >= 20 - this.crit && defense != hit)) {
+    if (hit > defense + target.parry || (hit >= 20 - this.crit && (hit > defense + target.parry))) {
       // HIT or CRITICAL(!PARRY)
       // HIT damage is reduced by target.def
       var damage = Math.floor(Math.random() * this.strength) + 1 + this.atk - target.def;
@@ -83,7 +83,6 @@ class Combatant {
             };
             return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
           } else {
-            logArray.push({ "action": `${target.name} stumbles!`, "bulma": target.logCss });
             nextAction = 'dead';
             return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
           }
@@ -190,7 +189,7 @@ class Combatant {
           nextAction = 'opportunityRoll';
         };
         return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
-      } else if (defense >= 20 - target.crit) {
+      } else if (defense >= 20 - target.crit + this.parry) {
         // CRITICAL BLOCK (range increased by crit stat)
         logArray.push({ "action": `🎯 CRITICAL BLOCK! 🛡️`, "bulma": `${target.logCss} ${critLogCss} pop-crit` });
         // logArray.push({ "action": `${target.name} 🎯🛡️ PERFECT DEFENSE!`, "bulma": target.logCss });

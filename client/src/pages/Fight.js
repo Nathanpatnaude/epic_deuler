@@ -67,11 +67,11 @@ function Fight() {
 
     const opponentStyle = (rating, ratingMe) => {
         if (rating < (ratingMe - 3)) {
-           return {backgroundColor: `#9d9d9d`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px'};
+           return {backgroundColor: `#9d9d9d`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '317px'};
         } else if (rating > (ratingMe + 3)) {
-            return {backgroundColor: `#a335ee`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px'};
+            return {backgroundColor: `#a335ee`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '317px'};
         } else {
-            return {backgroundColor: `#0070dd`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px'};
+            return {backgroundColor: `#0070dd`, textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '328px', height: '317px'};
         }
     }
     const handleFight = async (opponent) => {
@@ -85,7 +85,7 @@ function Fight() {
     return (
         <>
         <div className="has-text-centered ">
-      <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid'}}>⚔️</h1>
+      <h1 className="title has-text-centered is-size-2 mb-4 equip" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', display: 'inline-block', fontSize: '33px', borderRadius: '60px', boxShadow: ' 0 0 8px #999', padding: '0.5em 0.6em', margin:'0px', borderBottom: '16px', borderBottomStyle: 'solid'}}><span className='span-outline'>⚔️</span></h1>
       </div>
                 {loading || loadingMe? (
         <div>Loading...</div>
@@ -97,7 +97,7 @@ function Fight() {
                    
                            
                    <div className={`dropdown pr-0 m-1 has-text-centered is-block`} key={opponent._id} style={opponentStyle(opponent.rating, dataMe.me.rating)}>
-              <div className='columns column p-0 m-0 is-full is-mobile' style={{ height: '240px'}}>
+              <div className='columns column p-0 m-0 is-full is-mobile' style={{ height: '250px'}}>
                 <div className=' pl-1 py-4' style={{ width: '148px' }}>               
                  <span className='button mb-2 is-size-5 p-1 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '4rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '316px', fontWeight: 'bold' }}>{opponent.name}</span>
                   <div className="mt-1 mb-2">
@@ -122,7 +122,7 @@ function Fight() {
                             Deaths: {opponent.deaths}
                         </div>
                         <div className='column is-full'>
-                        <Button className='buy' style={{ backgroundColor: '#e6cc80', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '25px', textShadow: '2px 2px 10px #ffffff' }} >+{(opponent.rating*10) +25}💎</Button>
+                        <Button className='buy' style={{ backgroundColor: '#e6cc80', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft:'20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '25px', textShadow: '2px 2px 10px #ffffff' }} >{(opponent.rating*10) +25}<span className='span-outline'>💎</span></Button>
                         </div>
                     </div>
                   </ListGroup.Item>
@@ -130,7 +130,7 @@ function Fight() {
                 
               </div>
               <div className='column is-full'>
-                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', marginRight: '-7px', marginLeft: '5px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}>⚔️FIGHT</Button>
+                <Button className={opponentCss(opponent.rating, dataMe.me.rating)} onClick={() => handleFight(opponent.name)}  style={{ borderRadius: '40px', marginTop: '-7px', marginRight: '-7px', marginLeft: '5px', textShadow: '2px 2px 10px #ffffff', color: 'black', width: '100%' }}><span className='span-outline'>⚔️</span>FIGHT</Button>
               </div>
             </div>
                     
