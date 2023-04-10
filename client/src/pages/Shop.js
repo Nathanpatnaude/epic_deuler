@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ListGroup from 'react-bootstrap/ListGroup';
-import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_SHOP, QUERY_ME } from "../utils/gql/queries";
@@ -27,15 +26,11 @@ function Shop() {
     if (!token || Auth.isTokenExpired(token)) {
       window.location.assign('/');
     }
-    var data2;
-    var gold;
+
     if (shopState.tabAll === 'is-active') {
-    data1? shopState.itemData = data1.shop : data2 = loading;
+    data1? shopState.itemData = data1.shop : shopState.itemData = loading;
     }
-    dataMe? gold = dataMe.gold: gold = 0;
-    console.log(dataMe);
-    console.log(shopState.itemData);
-    // const itemData = JSON.stringify(shopData.shop)
+
     
     const handleTabs = (itemType) => {
       if (itemType === 'all') {
@@ -49,7 +44,6 @@ function Shop() {
           itemData: [...data1.shop],
         });
      } else if (itemType === 'weapon') {
-        var filteredList = data1.shop.filter(item => item.itemtype === 'weapon');
         
         setShopState({
           tabWeapons: 'is-active',
@@ -57,10 +51,9 @@ function Shop() {
           tabArmor: '',
           tabTrinket: '',          
           tabSell: '',
-          itemData: [...filteredList],
+          itemData: [...data1.shop.filter(item => item.itemtype === 'weapon')],
         });
      } else if (itemType === 'armor') {
-      var filteredList = data1.shop.filter(item => item.itemtype === 'armor');
         
       setShopState({
         tabWeapons: '',
@@ -68,23 +61,21 @@ function Shop() {
         tabArmor: 'is-active',
         tabTrinket: '',
         tabSell: '',
-        itemData: [...filteredList],
+        itemData: [...data1.shop.filter(item => item.itemtype === 'armor')],
       });
      } else if (itemType === 'trinket') {
-      var filteredList = data1.shop.filter(item => item.itemtype === 'trinket');
-        
+              
       setShopState({
         tabWeapons: '',
         tabAll: '',
         tabArmor: '',
         tabTrinket: 'is-active',
         tabSell: '',
-        itemData: [...filteredList],
+        itemData: [...data1.shop.filter(item => item.itemtype === 'trinket')],
       });
      } else if (itemType === 'sell') {
       const equipped = [dataMe.me.inventory.weapon._id, dataMe.me.inventory.armor._id, dataMe.me.inventory.slot1._id, dataMe.me.inventory.slot2._id, dataMe.me.inventory.slot3._id, dataMe.me.inventory.slot4._id];
-      const bag = dataMe.me.inventory.bag.map(owned => owned._id)
-      var filteredList = data1.shop.filter(item => bag.includes(item._id));
+      const bag = dataMe.me.inventory.bag.map(owned => owned._id);
         
       setShopState({
         tabWeapons: '',
@@ -92,7 +83,7 @@ function Shop() {
         tabArmor: '',
         tabTrinket: '',
         tabSell: 'is-active',
-        itemData: [...filteredList.filter(item => !equipped.includes(item._id))],
+        itemData: [...data1.shop.filter(item => bag.includes(item._id)).filter(item => !equipped.includes(item._id))],
       });
      } else {
       console.log('error');
@@ -101,13 +92,13 @@ function Shop() {
 
     const ifNotEquipped = (filteredList) => {
       const equipped = [dataMe.me.inventory.weapon._id, dataMe.me.inventory.armor._id, dataMe.me.inventory.slot1._id, dataMe.me.inventory.slot2._id, dataMe.me.inventory.slot3._id, dataMe.me.inventory.slot4._id, ...dataMe.me.inventory.bag.map(owned => owned._id)];
-      // equipped.push(...bag);
+
       var list = filteredList
-      if (shopState.tabAll != 'is-active') {
+      if (shopState.tabAll !== 'is-active') {
         list = filteredList.filter(item => !equipped.includes(item._id))
       }
       console.log(list);
-      if (shopState.tabSell != 'is-active') {
+      if (shopState.tabSell !== 'is-active') {
         return list;
       } else {        
         return filteredList.filter(item => equipped.includes(item._id))
@@ -138,7 +129,7 @@ function Shop() {
         } else {
           return (<Button className='shop-button buy' onClick={() => handlePurchase(item._id, 'buy')} style={{ backgroundColor: '#0070dd'}} >{item.price}<span className='span-outline'>💎</span></Button>)
         }
-      } else if (shopState.tabSell != 'is-active') {
+      } else if (shopState.tabSell !== 'is-active') {
         return (<Button className='shop-button' style={{ backgroundColor: 'grey'}} >SOLD</Button>)
       } else {
         return (<Button className='shop-button sell' onClick={() => handlePurchase(item._id, 'sell')} style={{ backgroundColor: '#e6cc80' }} >{Math.floor(item.price/2)}<span className='span-outline'>💎</span></Button>)
@@ -233,30 +224,3 @@ function Shop() {
     
     export default Shop;
     
-    
-    // Having trouble accessing the amount of gold the character has 
-    
-    // import { useState } from 'react';
-    // const [inventory, setInventory] = useState([]);
-    
-    // const addToInventory = (item) => {
-        //     setInventory([...inventory, item]);
-        // const charGold = require('../../../server/models/Character')
-// onClick={() => {
-//     if (item.price > charGold.gold) {
-//         alert('You cannot afford that item!')
-//     } else {
-//         addToInventory(item);
-//         alert('Item added successfully to you inventory')
-//     }
-// }}
-
-
-// const ifNotEquipped = (itemid) => {
-//   const equipped = [data1.me.inventory.weapon._id, data1.me.inventory.armor._id, data1.me.inventory.slot1._id, data1.me.inventory.slot2._id, data1.me.inventory.slot3._id, data1.me.inventory.slot4._id];
-//   if (!equipped.includes(itemid)) {
-//   return ( <Button className='is-pulled-right' onClick={() => handlePurchase(itemid)} style={{ backgroundColor: '#0070dd', textShadow:'2px 2px 10px #ffffff', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} >Sell💎</Button>
-//   )
-// } else {
-//   return (<Button className='is-pulled-right' style={{ backgroundColor: '#0070dd', borderRadius: '40px', padding: '10px', paddingTop: '3px', paddingLeft: '20px', position: 'right', right: '160px', alignItems: 'center', width: 'fit-content', display: 'initial', fontSize: '33px' }} ></Button>)
-// }

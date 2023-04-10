@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_CHARACTER } from "../utils/gql/mutations";
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Badge from 'react-bootstrap/Badge';
 import { QUERY_ME, QUERY_OPPONENT } from "../utils/gql/queries";
 import Combatant from "../utils/combatant";
@@ -45,7 +44,7 @@ function Battle() {
     const { loading: loading2, data: data2 } = useQuery(QUERY_OPPONENT, {
         variables: { name: opponent },
     });
-    const [charUpdate, { error: charUpdateError, data: charUpdateData }] = useMutation(UPDATE_CHARACTER);
+    const [charUpdate] = useMutation(UPDATE_CHARACTER);
 
     var token = Auth.getToken();
     if (!token || Auth.isTokenExpired(token)) {
@@ -219,14 +218,14 @@ function Battle() {
             console.error(JSON.parse(JSON.stringify(err)));
         }
         try {
-            var gain = 0;
+            var loss = 0;
             if (!player1.isAlive()) {
-                gain = (player2.rating * 10) + 25;
+                loss = (player2.rating * 10) + 25;
                 console.log('this should be sworksgfogjnfgoni')
-                battleState.combatLog.push({ "action": `-${Math.floor(gain / 7)}💎`, "bulma": "button is-danger has-text-centered is-large is-fullwidth title" });
+                battleState.combatLog.push({ "action": `-${Math.floor(loss / 7)}💎`, "bulma": "button is-danger has-text-centered is-large is-fullwidth title" });
             }
             const { data: charLoss } = await charUpdate({
-                variables: { name: loser.name, win: false, gain: gain },
+                variables: { name: loser.name, win: false, gain: loss },
             });
             console.log(charLoss);
 
@@ -354,6 +353,7 @@ function Battle() {
                         </div>
                         <div className="tile is-parent" style={{ border: '4px solid rgba(1, 1, 1, 1)', borderRadius: '40px' }}>
                             <div id="messageBody" className="panel-Body box scroll is-size-4 is-size-6-mobile is-flex">
+                                <div className='scroll'></div>
                                 <div className=" buy button is-warning has-text-centered is-large is-fullwidth title" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #ffffff, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black', borderRadius: '40px', height: '80px' }} onClick={() => (startFight())}>
                                     <p className="title">{battleState.actionDes}</p>
                                 </div>

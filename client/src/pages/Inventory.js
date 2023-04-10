@@ -33,7 +33,7 @@ const Inventory = () => {
     if (!token) {
       return false;
     }
-    if (remove != true) {
+    if (remove !== true) {
       try {
         var action = 'equip';
         const { data } = await equipItem({
@@ -46,9 +46,9 @@ const Inventory = () => {
     } else {
       console.log('remove it');
       try {
-        var action = 'remove';
+        var action2 = 'remove';
         const { data } = await equipItem({
-          variables: { itemId: item, action: action, slot: slot },
+          variables: { itemId: item, action: action2, slot: slot },
         });
 
       } catch (err) {
@@ -167,7 +167,7 @@ const Inventory = () => {
         {Object.keys(inventory).map((key, index) => {
           if (index > 0 && index < 7) {
             return (
-              <button className={`button dropdown p-2 m-2 is-block has-text-centered ${activeDropdown === key ? 'is-active' : ''} `} key={callKey(key)} style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '140px', height: '100%'}} onClick={() => handleDropdownClick(key)} onBlur={() => handleDropdownClick()}>
+              <button className={`button dropdown p-2 m-2 is-block has-text-centered ${activeDropdown === key ? 'is-active' : ''} `} key={callKey(key) + key} style={{ backgroundColor: '#a335ee', textShadow: '2px 2px 10px #ffffff', borderRadius: '20px', width: '140px', height: '100%'}} onClick={() => handleDropdownClick(key)} onBlur={() => handleDropdownClick()}>
                 <div className="has-text-centered">{key.charAt(0).toUpperCase() + key.slice(1)}</div>
                 <span className='button mb-2 equip' style={{ backgroundColor: `#e6cc80`, whiteSpace: 'normal', height: '3rem', border: '2px solid rgba(1, 1, 1, 1)', borderRadius: '40px', width: '100%' }}>{callKey(key, 'name')}</span>
                 <div className=" dropdown-trigger ">
@@ -183,23 +183,23 @@ const Inventory = () => {
                       if (inventory.bag[i].itemtype === key && !trinketArray.includes(inventory.bag[i]._id)) {
 
                         return (
-                          <button className="has-text-left dropdown-item dropdown button is-large" key={`${item.name}-${key}`} onMouseDown={() => handleItemClick(item, key)} >
-                            <span className="button equip is-outlined is-size-5 pl-2 pr-2 pb-0 pt-0" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', borderRadius: '40px', borderBottom: '8px', borderBottomStyle: 'solid' }}>{item.icon}</span>  {item.name}
-                          </button>
+                          <div className="has-text-left dropdown-item dropdown button is-large" key={`${item.name}-${key}`} onMouseDown={() => handleItemClick(item, key)} >
+                            <span className="button equip is-outlined is-size-5 pl-2 pr-2 pb-0 pt-0" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black', borderRadius: '40px', borderBottom: '8px', borderBottomStyle: 'solid' }}>{item.icon}</span>  {item.name}
+                          </div>
                         );
                       } else if (inventory.bag[i].itemtype === 'trinket' && (key === 'slot1' || key === 'slot2' || key === 'slot3' || key === 'slot4') && !trinketArray.includes(inventory.bag[i]._id)) {
                         return (
-                          <button className="has-text-left dropdown-item dropdown button is-large" key={`${item.name}-${key}`} onMouseDown={() => handleItemClick(item, key)}>
-                            <span className="button equip is-outlined is-size-5 pl-2 pr-2 pb-0 pt-0" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', borderRadius: '40px', borderBottom: '8px', borderBottomStyle: 'solid' }}>{item.icon}</span>  {item.name}
-                          </button>
+                          <div className="has-text-left dropdown-item dropdown button is-large" key={`${item.name}-${key}`} onMouseDown={() => handleItemClick(item, key)}>
+                            <span className="button equip is-outlined is-size-5 pl-2 pr-2 pb-0 pt-0" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black', borderRadius: '40px', borderBottom: '8px', borderBottomStyle: 'solid' }}>{item.icon}</span>  {item.name}
+                          </div>
                         );
                       } else {
                         return null;
                       };
                     })}
-                    <button className="has-text-left dropdown-item dropdown button is-large" key={`None-${key}`} onMouseDown={() => handleItemClick(callKey(key, 'id'), key, true)}>
+                    <div className="has-text-left dropdown-item dropdown button is-large" key={`None-${key}`} onMouseDown={() => handleItemClick(callKey(key, 'id'), key, true)}>
                     <span className="button equip is-outlined is-size-5 pl-2 pr-2 pb-0 pt-0" style={{ backgroundColor: '#e6cc80', textShadow: '2px 2px 10px #a335ee', borderRadius: '40px', borderBottom: '8px', borderBottomStyle: 'solid' }}>🚫</span>  Unequip
-                    </button>
+                    </div>
                   </div>
                 </div>
               </button>
