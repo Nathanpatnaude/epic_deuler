@@ -40,7 +40,7 @@ class Combatant {
     var logArray = [];
     var nextAction = '';
 
-    if (hit > defense + target.parry || (hit >= 20 - this.crit && (hit > defense + target.parry))) {
+    if (hit > defense + target.parry || (hit >= 20 - this.crit && (hit > defense + target.parry)) || hit === 20) {
       // HIT or CRITICAL(!PARRY)
       // HIT damage is reduced by target.def
       var damage = Math.floor(Math.random() * this.strength) + 1 + this.atk - target.def;
@@ -51,13 +51,13 @@ class Combatant {
       }
       if (hit >= 20 - this.crit) {
         // CRITICAL range increased by attacker's.crit
-        if (defense >= 20 - target.crit) {
+        if (defense >= 20 - Math.floor(target.def/2)) {
           //MUTUAL CRITICAL nullifies 2x crit modifier
           //MUTUAL CRITICAL grants defender BASH attack
           var bash = Math.floor(Math.random() * target.def) + 1;
           if (defense > hit) {
-            // higher defense roll recieves additional .crit bonus
-            bash += Math.floor(Math.random() * target.crit) + 1;
+            // higher defense roll recieves additional .def bonus
+            bash += Math.floor(Math.random() * Math.floor(target.def/2)) + 1;
             logArray.push({ "action": `🎯 MUTUAL CRITICAL! 🛡️`, "bulma": `${critLogCss} pop-crit`});
           } else {
             // higher hit roll recieves additional .crit bonus
@@ -126,7 +126,7 @@ class Combatant {
     } else if (hit >= defense && hit <= defense + target.parry) {
       // PARRY (range increased by parry stat)
       // PARRY occurs when hit = defense 
-      if (defense >= 20 - target.crit - target.parry) {
+      if (defense >= 20 - Math.floor(target.def/2) - target.parry) {
         // CRITICAL PARRY (range increased by crit or parry stat)
         logArray.push({ "action": `🎯 CRITICAL PARRY! ⚔️`, "bulma": `${target.logCss} ${critLogCss} pop-crit` });
         var glance = Math.floor(Math.random() * target.strength / 2) + 1 + target.parry + target.atk - this.def;
@@ -189,14 +189,14 @@ class Combatant {
           nextAction = 'opportunityRoll';
         };
         return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
-      } else if (defense >= 20 - target.crit + this.parry) {
+      } else if (defense >= 20 - Math.floor(target.def/2)) {
         // CRITICAL BLOCK (range increased by crit stat)
         logArray.push({ "action": `🎯 CRITICAL BLOCK! 🛡️`, "bulma": `${target.logCss} ${critLogCss} pop-crit` });
         // logArray.push({ "action": `${target.name} 🎯🛡️ PERFECT DEFENSE!`, "bulma": target.logCss });
-        if (hit <= (target.def * 2) + Math.floor(Math.random(target.strength / 2)) + target.crit) {
+        if (hit <= (target.def * 2) + target.atk) {
           // BASH occurs when the blocked attack roll is lower than the combined defenders strength and defense
           // BASH damage is based on the defenders def value
-          var bash3 = Math.floor(Math.random() * target.def) + 1 + Math.floor(Math.random() * target.crit);
+          var bash3 = Math.floor(Math.random() * target.def) + 1;
 
           if (bash3 > 0) {
             this.hitpoints -= bash3;
@@ -219,11 +219,11 @@ class Combatant {
           nextAction = 'dead';
           return { logArray, nextAction, "thisHp": `${this.hitpoints}`, 'targetHp': `${target.hitpoints}` };
         }
-      } else if (defense - Math.floor((this.strength) / 2) <= hit - (Math.floor(target.def / 1.1) + target.parry)) {
+      } else if (defense - Math.floor((this.strength) / 2) - this.atk <= hit - (Math.floor(target.def * 2))) {
         //GLANCING ATTACK results in a halved attack if the HIT and DEFENSE rolls were close
         //GLANCING ATTACK range is increased by the Attacker's.strength and reduced by defender's.def
         //bigger weapons have a higher chance to cause partial damage vs low .def
-        var glance3 = Math.floor(Math.random() * this.strength / 2) + 1 + this.atk - target.def;
+        var glance3 = Math.floor(Math.random() * this.strength / 2) + 1 + this.atk + this.parry - target.def - target.parry;
         if (glance3 <= 0) {
           logArray.push({ "action": `${target.name} 🛡️ BLOCKED!`, "bulma": `${target.logCss} pop-outin-block`});
           if (action === 'opportunity') {

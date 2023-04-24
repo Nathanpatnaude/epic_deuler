@@ -277,11 +277,13 @@ function Battle() {
             rollInit()
         } else if (opponentInit > playerInit) {
             playerTurn = false;
-            battleState.combatLog.push({ "action": `(${opponentInit}) 🎲🌀 INITIATIVE 🌀🎲 (${playerInit})`, "bulma": rollLogCss });
+            battleState.combatLog.push({ "action": `(${playerInit}) 🎲🌀 INITIATIVE ✅🎲 (${opponentInit})`, "bulma": rollLogCss });
+            battleState.opponentRollIcon = '✅';
 
         } else {
             playerTurn = true;
-            battleState.combatLog.push({ "action": `(${opponentInit}) 🎲🌀 INITIATIVE  🌀🎲 (${playerInit})`, "bulma": rollLogCss });
+            battleState.combatLog.push({ "action": `(${playerInit}) 🎲✅ INITIATIVE  🌀🎲 (${opponentInit})`, "bulma": rollLogCss });
+            battleState.playerRollIcon = '✅';
 
         }
         battleState.initRolls++;
